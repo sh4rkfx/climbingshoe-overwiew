@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kletterschuh-Übersicht · La Sportiva · Scarpa · Tenaya · evolv · Five Ten · Mad Rock · Boreal · Ocún · Red Chili · UnParallel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#11100d; --panel:#1a1813; --panel-2:#211e18;
+    --ink:#f2ede1; --ink-dim:#b7ad97; --line:#312c23;
+    --accent:#e0723a; --accent-2:#c9a227;
+    --s1:#3f7d52; --s2:#6b9540; --s3:#c9a227; --s4:#d97a2c; --s5:#c0432b;
+    --s1b:#16241b; --s2b:#22281a; --s3b:#2c2614; --s4b:#2e2113; --s5b:#2b1714;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1100px 600px at 85% -8%, #221d15 0%, transparent 60%),
+      radial-gradient(900px 500px at -5% 12%, #1c241f 0%, transparent 55%),
+      var(--bg);
+    color:var(--ink); font-family:'Archivo',sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased; padding:0 0 80px;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+  header{padding:60px 0 30px;border-bottom:1px solid var(--line)}
+  .kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:18px}
+  h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(2.3rem,6vw,4.2rem);line-height:.98;letter-spacing:-.01em}
+  h1 em{font-style:italic;font-weight:500;color:var(--accent-2)}
+  .sub{margin-top:18px;color:var(--ink-dim);max-width:66ch;font-size:1.02rem}
+  .brandrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .brandrow a{text-decoration:none;color:var(--ink);font-weight:600;font-size:.83rem;border:1px solid var(--line);background:var(--panel);padding:7px 14px;border-radius:999px;transition:.18s}
+  .brandrow a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+  .legend{margin:34px 0 10px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+  .legend h2{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;margin-bottom:14px}
+  .legend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+  .legend-grid p{font-size:.86rem;color:var(--ink-dim);margin-top:4px}
+  .legend-grid b{color:var(--ink);font-weight:600}
+  .ramp{display:flex;gap:4px;margin-top:8px}
+  .ramp span{flex:1;height:9px;border-radius:3px}
+  .scalekey{display:flex;justify-content:space-between;font-size:.68rem;color:var(--ink-dim);margin-top:5px}
+  .niv-key{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+
+  .filterbar{position:sticky;top:0;z-index:60;margin-top:26px;
+    background:rgba(20,18,14,.86);backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .fb-inner{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:14px 22px}
+  .fb-inner input,.fb-inner select{
+    font-family:'Archivo',sans-serif;font-size:.84rem;color:var(--ink);
+    background:var(--panel-2);border:1px solid var(--line);border-radius:9px;
+    padding:9px 12px;outline:none;transition:.15s}
+  .fb-inner input{flex:1 1 200px;min-width:160px}
+  .fb-inner input::placeholder{color:var(--ink-dim)}
+  .fb-inner select{cursor:pointer}
+  .fb-inner input:focus,.fb-inner select:focus{border-color:var(--accent)}
+  #f-reset{cursor:pointer;background:var(--accent);color:#1a1208;border:none;font-weight:700;
+    font-size:.8rem;padding:9px 16px;border-radius:9px;transition:.15s}
+  #f-reset:hover{filter:brightness(1.08)}
+  #f-count{font-size:.78rem;color:var(--ink-dim);font-weight:600;margin-left:auto;white-space:nowrap}
+  .fb-empty{display:none;text-align:center;color:var(--ink-dim);padding:50px 20px;font-size:.95rem}
+
+  section{margin-top:50px;scroll-margin-top:78px}
+  .sec-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+  .sec-head h2{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(1.7rem,3.5vw,2.5rem);letter-spacing:-.01em}
+  .sec-head .tag{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .sec-note{color:var(--ink-dim);font-size:.92rem;margin-bottom:20px;max-width:78ch}
+
+  .tablecard{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;min-width:880px;font-size:.86rem}
+  thead th{background:var(--panel-2);text-align:left;padding:13px 12px;font-weight:600;font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-dim);border-bottom:1px solid var(--line);white-space:nowrap}
+  thead th.sortable{cursor:pointer;user-select:none;transition:.15s}
+  thead th.sortable:hover{color:var(--accent)}
+  thead th.sortable::after{content:" \2195";opacity:.32;font-size:.85em}
+  thead th.sorted-asc::after{content:" \25B2";opacity:1;color:var(--accent)}
+  thead th.sorted-desc::after{content:" \25BC";opacity:1;color:var(--accent)}
+  tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:rgba(224,114,58,.045)}
+  .model{font-weight:700;font-size:.95rem;white-space:nowrap}
+  .model small{display:block;font-weight:400;color:var(--ink-dim);font-size:.74rem;margin-top:2px;white-space:normal}
+  .use{color:var(--ink-dim);min-width:150px}
+  td.cell-num{text-align:center;font-weight:700;width:54px}
+  .chip{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;font-weight:700;font-size:.9rem}
+  .v1{background:var(--s1b);color:var(--s1);box-shadow:inset 0 0 0 1px var(--s1)}
+  .v2{background:var(--s2b);color:var(--s2);box-shadow:inset 0 0 0 1px var(--s2)}
+  .v3{background:var(--s3b);color:var(--s3);box-shadow:inset 0 0 0 1px var(--s3)}
+  .v4{background:var(--s4b);color:var(--s4);box-shadow:inset 0 0 0 1px var(--s4)}
+  .v5{background:var(--s5b);color:var(--s5);box-shadow:inset 0 0 0 1px var(--s5)}
+  .fit{font-size:.82rem;white-space:nowrap}
+  .niv{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.04em;padding:4px 9px;border-radius:6px;white-space:nowrap}
+  .n-ein{background:#1d2a20;color:#7fb98a;box-shadow:inset 0 0 0 1px #2f6640}
+  .n-int{background:#2a2614;color:#d8b94a;box-shadow:inset 0 0 0 1px #6b5a20}
+  .n-fort{background:#2c1f14;color:#e8975a;box-shadow:inset 0 0 0 1px #7a4a26}
+  .n-pro{background:#2b1614;color:#e8736a;box-shadow:inset 0 0 0 1px #7a2f2a}
+  .closure{font-size:.78rem;color:var(--ink-dim);white-space:nowrap}
+
+  .matrix table{min-width:860px}
+  .matrix td:first-child{font-weight:700;font-family:'Fraunces',serif;font-size:.95rem;background:var(--panel-2)}
+  .matrix td{font-size:.82rem;line-height:1.45}
+  .matrix b{color:var(--accent-2)}
+
+  .footnote{margin-top:14px;font-size:.78rem;color:var(--ink-dim)}
+  .callout{background:linear-gradient(120deg,#241a12,#1c2620);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:16px 20px;margin-top:16px;font-size:.88rem;color:var(--ink-dim)}
+  .callout b{color:var(--ink)}
+  footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:var(--ink-dim);font-size:.78rem}
+  @media(max-width:640px){
+    header{padding:44px 0 24px}
+    .wrap{padding:0 15px}
+    .fb-inner{padding:12px 15px}
+    #f-count{margin-left:0;width:100%}
+    .chip{width:26px;height:26px;font-size:.82rem}
+  }
+
+  /* ---- brand multi-select chips ---- */
+  .brandchips{display:flex;flex-wrap:wrap;gap:6px;flex-basis:100%}
+  .brandchips button{font-family:'Archivo',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink-dim);
+    background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer;transition:.15s}
+  .brandchips button:hover{border-color:var(--accent);color:var(--ink)}
+  .brandchips button.active{background:var(--accent);color:#1a1208;border-color:var(--accent)}
+
+  /* ---- compare checkbox column ---- */
+  th.cmp-h{width:42px;text-align:center;font-size:.62rem;color:var(--ink-dim)}
+  td.cmp-c{width:42px;text-align:center}
+  .cmp-box{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1.5px solid var(--line);
+    border-radius:6px;background:var(--panel-2);cursor:pointer;position:relative;transition:.15s;vertical-align:middle}
+  .cmp-box:hover{border-color:var(--accent)}
+  .cmp-box:checked{background:var(--accent);border-color:var(--accent)}
+  .cmp-box:checked::after{content:"\2713";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#1a1208;font-size:.8rem;font-weight:900}
+
+  /* ---- compare tray ---- */
+  .cmp-tray{position:fixed;left:0;right:0;bottom:0;z-index:70;transform:translateY(125%);transition:transform .25s ease;
+    background:rgba(20,18,14,.95);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .cmp-tray.show{transform:translateY(0)}
+  .cmp-tray-inner{max-width:1180px;margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .cmp-tray .lbl{font-size:.78rem;color:var(--ink-dim);font-weight:600;white-space:nowrap}
+  .cmp-items{display:flex;flex-wrap:wrap;gap:6px;flex:1;min-width:120px}
+  .cmp-item{display:inline-flex;align-items:center;gap:4px;font-size:.78rem;font-weight:600;
+    background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:5px 6px 5px 12px}
+  .cmp-item button{background:none;border:none;color:var(--ink-dim);cursor:pointer;font-size:1.05rem;line-height:1;padding:0 4px}
+  .cmp-item button:hover{color:var(--accent)}
+  .cmp-tray .go{background:var(--accent);color:#1a1208;border:none;font-weight:700;font-size:.82rem;padding:9px 18px;border-radius:9px;cursor:pointer;transition:.15s}
+  .cmp-tray .go:hover{filter:brightness(1.08)}
+  .cmp-tray .go:disabled{opacity:.4;cursor:not-allowed;filter:none}
+  .cmp-tray .clr{background:none;border:1px solid var(--line);color:var(--ink-dim);font-weight:600;font-size:.78rem;padding:9px 14px;border-radius:9px;cursor:pointer}
+  .cmp-tray .clr:hover{border-color:var(--accent);color:var(--ink)}
+  body.tray-on{padding-bottom:130px}
+
+  /* ---- compare modal ---- */
+  .cmp-modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:18px;
+    background:rgba(8,7,5,.74);backdrop-filter:blur(4px)}
+  .cmp-modal.show{display:flex}
+  .cmp-dialog{background:var(--panel);border:1px solid var(--line);border-radius:18px;max-width:920px;width:100%;max-height:88vh;overflow:auto}
+  .cmp-dialog-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel);z-index:2}
+  .cmp-dialog-head h3{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:900}
+  .cmp-close{background:none;border:1px solid var(--line);color:var(--ink);width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:1.1rem;line-height:1}
+  .cmp-close:hover{border-color:var(--accent);color:var(--accent)}
+  .cmp-table{width:100%;border-collapse:collapse;min-width:auto;font-size:.86rem}
+  .cmp-table th,.cmp-table td{padding:13px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  .cmp-table thead th{background:var(--panel-2);font-family:'Fraunces',serif;font-weight:700;font-size:1rem;color:var(--ink);text-transform:none;letter-spacing:0;white-space:normal}
+  .cmp-table tbody th{font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-dim);font-weight:600;white-space:nowrap;background:var(--panel);width:140px}
+  .cmp-table .brandtag{font-size:.7rem;color:var(--accent);font-weight:600;display:block;margin-bottom:3px}
+
+  /* ---- multi-select dropdown ---- */
+  .ms{position:relative}
+  .ms-btn{font-family:'Archivo',sans-serif;font-size:.84rem;font-weight:600;color:var(--ink-dim);background:var(--panel-2);
+    border:1px solid var(--line);border-radius:9px;padding:9px 28px 9px 12px;cursor:pointer;white-space:nowrap;position:relative;transition:.15s}
+  .ms-btn::after{content:"\25BE";position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:.7em;color:var(--ink-dim)}
+  .ms-btn:hover{border-color:var(--accent);color:var(--ink)}
+  .ms-btn.has{border-color:var(--accent);color:var(--accent)}
+  .ms-panel{display:none;position:absolute;top:calc(100% + 6px);left:0;z-index:80;background:var(--panel);
+    border:1px solid var(--line);border-radius:11px;padding:7px;min-width:185px;box-shadow:0 14px 34px rgba(0,0,0,.45);max-height:300px;overflow:auto}
+  .ms.open .ms-panel{display:block}
+  .ms-panel label{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:7px;font-size:.83rem;color:var(--ink);cursor:pointer}
+  .ms-panel label:hover{background:var(--panel-2)}
+  .ms-panel input{appearance:none;-webkit-appearance:none;width:17px;height:17px;border:1.5px solid var(--line);border-radius:5px;
+    background:var(--panel-2);cursor:pointer;position:relative;flex:none;transition:.12s}
+  .ms-panel input:checked{background:var(--accent);border-color:var(--accent)}
+  .ms-panel input:checked::after{content:"\2713";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#1a1208;font-size:.7rem;font-weight:900}
+  .ms-panel .num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;font-weight:700;font-size:.78rem;margin-right:2px}
+  td.rubber{font-size:.78rem}
+  .rub{display:inline-block;font-size:.72rem;font-weight:600;color:var(--ink);background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:3px 8px;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <div class="kicker">Performance · Härte · Downturn · Asymmetrie · Leisten · Niveau</div>
+  <h1>Kletterschuh-<br><em>Übersicht</em></h1>
+  <p class="sub">Die relevanten aktuellen Modelle von La Sportiva, Scarpa, Tenaya, evolv, Five Ten, Mad Rock, Boreal, Ocún, Red Chili und UnParallel – farbcodiert für den direkten Vergleich. Mit der Filterleiste nach Marke, Niveau, Härte, Downturn oder Asymmetrie eingrenzen; ein Klick auf eine Spaltenüberschrift sortiert die jeweilige Tabelle.</p>
+  <nav class="brandrow">
+    <a href="#legende">Legende</a>
+    <a href="#lasportiva">La Sportiva</a>
+    <a href="#scarpa">Scarpa</a>
+    <a href="#tenaya">Tenaya</a>
+    <a href="#evolv">evolv</a>
+    <a href="#fiveten">Five Ten</a>
+    <a href="#madrock">Mad Rock</a>
+    <a href="#boreal">Boreal</a>
+    <a href="#ocun">Ocún</a>
+    <a href="#redchili">Red Chili</a>
+    <a href="#unparallel">UnParallel</a>
+    <a href="#matrix">Äquivalenz-Matrix</a>
+  </nav>
+</header>
+
+<div class="legend" id="legende">
+  <h2>So liest du die Tabellen</h2>
+  <div class="legend-grid">
+    <div>
+      <b>Härte (Steifigkeit) 1–5</b>
+      <div class="ramp"><span style="background:var(--s1)"></span><span style="background:var(--s2)"></span><span style="background:var(--s3)"></span><span style="background:var(--s4)"></span><span style="background:var(--s5)"></span></div>
+      <div class="scalekey"><span>weich · sensitiv</span><span>steif · Kante</span></div>
+      <p>1 = max. Sensitivität/Schmieren · 5 = harte Kantenplattform.</p>
+    </div>
+    <div>
+      <b>Downturn (Vorspannung) 1–5</b>
+      <div class="ramp"><span style="background:var(--s1)"></span><span style="background:var(--s2)"></span><span style="background:var(--s3)"></span><span style="background:var(--s4)"></span><span style="background:var(--s5)"></span></div>
+      <div class="scalekey"><span>flach</span><span>aggressiv</span></div>
+      <p>1 = flach (Platten/Risse) · 5 = stark gekrümmt (steile Dächer).</p>
+    </div>
+    <div>
+      <b>Asymmetrie 1–5</b>
+      <div class="ramp"><span style="background:var(--s1)"></span><span style="background:var(--s2)"></span><span style="background:var(--s3)"></span><span style="background:var(--s4)"></span><span style="background:var(--s5)"></span></div>
+      <div class="scalekey"><span>symmetrisch</span><span>spitz</span></div>
+      <p>Kraftbündelung auf die Großzehe; höher = präziser, unbequemer.</p>
+    </div>
+    <div>
+      <b>Niveau</b>
+      <div class="niv-key">
+        <span class="niv n-ein">Einsteiger</span>
+        <span class="niv n-int">Intermediate</span>
+        <span class="niv n-fort">Fortgeschritten</span>
+        <span class="niv n-pro">Profi/Elite</span>
+      </div>
+      <p>Empfohlenes Können bzw. Leistungsanspruch des Schuhs.</p>
+    </div>
+    <div>
+      <b>Leisten / Fit</b>
+      <p>Volumen &amp; Form: <b>NV</b> normal · <b>LV</b> low volume/schmal · <b>HV</b> hoch · plus Zehenbox (schmal/breit). LV-Varianten sind enger geschnitten.</p>
+    </div>
+    <div>
+      <b>Sortieren</b>
+      <p>Klick auf eine Spaltenüberschrift sortiert die Tabelle (erneuter Klick kehrt die Richtung um). Filter und Sortierung wirken zusammen.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============ FILTER BAR ============ -->
+<div class="filterbar">
+  <div class="wrap fb-inner">
+    <input id="f-search" type="text" placeholder="Suche: Modell, Einsatz, Verschluss …" aria-label="Textsuche">
+    <div class="brandchips" id="f-brand" aria-label="Marke">
+      <button type="button" data-b="all" class="active">Alle Marken</button>
+      <button type="button" data-b="lasportiva">La Sportiva</button>
+      <button type="button" data-b="scarpa">Scarpa</button>
+      <button type="button" data-b="tenaya">Tenaya</button>
+      <button type="button" data-b="evolv">evolv</button>
+      <button type="button" data-b="fiveten">Five Ten</button>
+      <button type="button" data-b="madrock">Mad Rock</button>
+      <button type="button" data-b="boreal">Boreal</button>
+      <button type="button" data-b="ocun">Ocún</button>
+      <button type="button" data-b="redchili">Red Chili</button>
+      <button type="button" data-b="unparallel">UnParallel</button>
+    </div>
+        <div class="ms" data-key="niv" data-label="Niveau">
+      <button type="button" class="ms-btn">Niveau</button>
+      <div class="ms-panel">
+        <label><input type="checkbox" value="ein">Einsteiger</label>
+        <label><input type="checkbox" value="int">Intermediate</label>
+        <label><input type="checkbox" value="fort">Fortgeschritten</label>
+        <label><input type="checkbox" value="pro">Profi/Elite</label>
+      </div>
+    </div>
+    <div class="ms" data-key="h" data-label="Härte">
+      <button type="button" class="ms-btn">Härte</button>
+      <div class="ms-panel">
+        <label><input type="checkbox" value="1"><span class="num v1">1</span>sehr weich</label>
+        <label><input type="checkbox" value="2"><span class="num v2">2</span>weich</label>
+        <label><input type="checkbox" value="3"><span class="num v3">3</span>mittel</label>
+        <label><input type="checkbox" value="4"><span class="num v4">4</span>steif</label>
+        <label><input type="checkbox" value="5"><span class="num v5">5</span>sehr steif</label>
+      </div>
+    </div>
+    <div class="ms" data-key="d" data-label="Downturn">
+      <button type="button" class="ms-btn">Downturn</button>
+      <div class="ms-panel">
+        <label><input type="checkbox" value="1"><span class="num v1">1</span>flach</label>
+        <label><input type="checkbox" value="2"><span class="num v2">2</span>leicht</label>
+        <label><input type="checkbox" value="3"><span class="num v3">3</span>mittel</label>
+        <label><input type="checkbox" value="4"><span class="num v4">4</span>aggressiv</label>
+        <label><input type="checkbox" value="5"><span class="num v5">5</span>sehr aggressiv</label>
+      </div>
+    </div>
+    <div class="ms" data-key="a" data-label="Asymmetrie">
+      <button type="button" class="ms-btn">Asymmetrie</button>
+      <div class="ms-panel">
+        <label><input type="checkbox" value="1"><span class="num v1">1</span>symmetrisch</label>
+        <label><input type="checkbox" value="2"><span class="num v2">2</span>leicht</label>
+        <label><input type="checkbox" value="3"><span class="num v3">3</span>mittel</label>
+        <label><input type="checkbox" value="4"><span class="num v4">4</span>spitz</label>
+        <label><input type="checkbox" value="5"><span class="num v5">5</span>sehr spitz</label>
+      </div>
+    </div>
+    <div class="ms" data-key="width" data-label="Leisten">
+      <button type="button" class="ms-btn">Leisten</button>
+      <div class="ms-panel">
+        <label><input type="checkbox" value="schmal">schmal / LV</label>
+        <label><input type="checkbox" value="mittel">mittel / NV</label>
+        <label><input type="checkbox" value="breit">breit / HV</label>
+      </div>
+    </div>
+    <div class="ms" data-key="rubber" data-label="Gummi">
+      <button type="button" class="ms-btn">Gummi</button>
+      <div class="ms-panel">
+        <label><input type="checkbox" value="xsgrip2">Vibram XS Grip2</label>
+        <label><input type="checkbox" value="xsgrip">Vibram XS Grip</label>
+        <label><input type="checkbox" value="xsedge">Vibram XS Edge</label>
+        <label><input type="checkbox" value="vision">Vibram Vision</label>
+        <label><input type="checkbox" value="frixion">FriXion (LS)</label>
+        <label><input type="checkbox" value="stealth">Stealth (5.10)</label>
+        <label><input type="checkbox" value="trax">TRAX (evolv)</label>
+        <label><input type="checkbox" value="sciencefriction">Science Friction</label>
+        <label><input type="checkbox" value="zenith">Zenith (Boreal)</label>
+        <label><input type="checkbox" value="cat">Ocún CAT</label>
+        <label><input type="checkbox" value="rx">Red Chili RX</label>
+        <label><input type="checkbox" value="uprh">UP RH</label>
+      </div>
+    </div>
+    <button id="f-reset" type="button">Zurücksetzen</button>
+    <span id="f-count"></span>
+  </div>
+</div>
+
+<div class="wrap">
+<p class="fb-empty" id="fb-empty">Keine Modelle entsprechen den gewählten Filtern. <a href="#" id="fb-clear" style="color:var(--accent)">Filter zurücksetzen</a></p>
+
+<!-- ============ LA SPORTIVA ============ -->
+<section id="lasportiva" data-brandsec>
+  <div class="sec-head"><span class="tag">Italien · FriXion / No-Edge / P3</span><h2>La Sportiva</h2></div>
+  <p class="sec-note">Breitestes Sortiment am Markt. Charakteristisch: P3-Spannungssystem (formstabiler Downturn), No-Edge-Technologie (abgerundete Sohlenkante, max. Sensitivität) bei Comp/Theory/Futura/Genius, und die wendige S-Heel-Ferse bei Skwama/Solution/Kataki.</p>
+  <div class="tablecard"><div class="scroll"><table>
+    <thead><tr><th class="sortable" data-sort="model">Modell</th><th class="sortable" data-sort="use">Performance / Einsatz</th><th class="sortable" data-sort="h">Härte</th><th class="sortable" data-sort="d">Downturn</th><th class="sortable" data-sort="a">Asym.</th><th class="sortable" data-sort="fit">Leisten / Fit</th><th class="sortable" data-sort="closure">Verschluss</th><th class="sortable" data-sort="rubber">Sohle / Gummi</th><th class="sortable" data-sort="niv">Niveau</th></tr></thead>
+    <tbody>
+      <tr data-shoe data-brand="lasportiva" data-niv="fort" data-h="3" data-d="4" data-a="4" data-width="schmal" data-rubbercat="xsgrip2"><td class="model">Solution</td><td class="use">Steiles Bouldern &amp; Sport, Allround aggressiv</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · eher schmal</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="pro" data-h="2" data-d="5" data-a="4" data-width="schmal" data-rubbercat="xsgrip2"><td class="model">Solution Comp</td><td class="use">Comp/Boulder, weicher &amp; sensitiver als Solution (No-Edge)</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v5">5</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · schmal</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="fort" data-h="2" data-d="4" data-a="4" data-width="mittel" data-rubbercat="xsgrip2"><td class="model">Skwama<small>auch Vegan / Woman</small></td><td class="use">Weiches Allround-Bouldern, Schmieren &amp; Hooks</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="int" data-h="2" data-d="3" data-a="3" data-width="mittel" data-rubbercat="xsgrip2"><td class="model">Skwama Lite<small>neu 2026</small></td><td class="use">Gym/Boulder, weiche &amp; komfortable Skwama-Variante</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="pro" data-h="1" data-d="5" data-a="5" data-width="schmal" data-rubbercat="xsgrip2"><td class="model">Theory</td><td class="use">Comp-Bouldern, sehr weich, No-Edge</td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v5">5</span></td><td class="cell-num"><span class="chip v5">5</span></td><td class="fit">LV · schmal</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="pro" data-h="2" data-d="5" data-a="5" data-width="mittel" data-rubbercat="xsgrip2"><td class="model">Ondra Comp<small>Adam Ondra · neu</small></td><td class="use">Comp-Bouldern &amp; steiles Gym, sehr weich, „Smeadging“, P3 + SenseGrip</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v5">5</span></td><td class="cell-num"><span class="chip v5">5</span></td><td class="fit">NV · breite Zehe, schmale Ferse</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="pro" data-h="2" data-d="4" data-a="4" data-width="mittel" data-rubbercat="xsgrip2"><td class="model">Futura</td><td class="use">Sensitives Sport/Boulder, No-Edge</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="pro" data-h="2" data-d="4" data-a="4" data-width="schmal" data-rubbercat="xsgrip2"><td class="model">Genius</td><td class="use">High-End Allround, No-Edge, sehr leicht</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · schmal</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="pro" data-h="3" data-d="4" data-a="4" data-width="schmal" data-rubbercat="xsgrip2"><td class="model">Testarossa</td><td class="use">Sport-Allround, präzises Kanten + Sensitivität</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · schmal</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="fort" data-h="4" data-d="3" data-a="3" data-width="mittel" data-rubbercat="xsedge"><td class="model">Katana Lace</td><td class="use">Allround-Klassiker: Sport, Mehrseil, Riss, Platte</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="fort" data-h="3" data-d="3" data-a="3" data-width="mittel" data-rubbercat="xsedge"><td class="model">Katana</td><td class="use">Allround, Klett-Version – etwas weicher/bequemer</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="fort" data-h="5" data-d="3" data-a="4" data-width="schmal" data-rubbercat="xsedge"><td class="model">Miura VS</td><td class="use">Kanten-Spezialist (Velcro), steif &amp; präzise</td><td class="cell-num"><span class="chip v5">5</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · schmal</td><td class="closure">Klett 3×</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="fort" data-h="5" data-d="2" data-a="3" data-width="schmal" data-rubbercat="xsedge"><td class="model">Miura</td><td class="use">Kanten/Sport (Schnürung), Technikschuh</td><td class="cell-num"><span class="chip v5">5</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · schmal</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="fort" data-h="4" data-d="3" data-a="4" data-width="mittel" data-rubbercat="xsedge"><td class="model">Otaki</td><td class="use">Sport/Allround mit Kraftübertragung (P3), Kanten</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="fort" data-h="4" data-d="3" data-a="4" data-width="mittel" data-rubbercat="xsedge"><td class="model">Kataki</td><td class="use">Sport/Trad-Kante, P3 + S-Heel, vertikal–leicht überhängend, Risse</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="fort" data-h="5" data-d="1" data-a="2" data-width="mittel" data-rubbercat="xsedge"><td class="model">TC Pro</td><td class="use">Trad/Granit/Riss, knöchelhoch, flach &amp; steif</td><td class="cell-num"><span class="chip v5">5</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel-hoch</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="int" data-h="2" data-d="1" data-a="2" data-width="mittel" data-rubbercat="xsgrip2"><td class="model">Cobra</td><td class="use">Slipper, weich, Gym/Riss/Sensitivität</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Slipper</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="int" data-h="3" data-d="1" data-a="1" data-width="mittel" data-rubbercat="xsedge"><td class="model">Mythos<small>auch Eco</small></td><td class="use">Komfort-Allday, Leder, Trad/Mehrseil-Klassiker</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">NV · anpassend (Leder)</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="ein" data-h="3" data-d="1" data-a="1" data-width="breit" data-rubbercat="frixion"><td class="model">Mistral</td><td class="use">Komfort-Allday, gefüttertes Leder, ganztägig &amp; vielseitig</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">NV · mittel-breit</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">FriXion</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="ein" data-h="3" data-d="1" data-a="2" data-width="breit" data-rubbercat="frixion"><td class="model">Finale</td><td class="use">Komfort-Allround, Leder, Sport &amp; Halle</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · breiter, anpassend</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">FriXion</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="ein" data-h="2" data-d="1" data-a="1" data-width="breit" data-rubbercat="frixion"><td class="model">HyperEZ<small>neu 2026</small></td><td class="use">Indoor-Komfort, kein Einlaufen, Lernen/Smearing &amp; Hooks</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">HV · hoch, breit</td><td class="closure">Klett 2× (gekreuzt)</td><td class="rubber"><span class="rub">FriXion</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="ein" data-h="3" data-d="1" data-a="2" data-width="mittel" data-rubbercat="frixion"><td class="model">Aragon</td><td class="use">Einsteiger-Allround, bequem, gutes Preis-Leistungs-Verhältnis</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">FriXion</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+      <tr data-shoe data-brand="lasportiva" data-niv="ein" data-h="3" data-d="1" data-a="1" data-width="breit" data-rubbercat="frixion"><td class="model">Tarantulace<small>Tarantula / Boulder</small></td><td class="use">Einsteiger, bequem, robust, Halle/Fels</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">HV · breit</td><td class="closure">Schnür/Klett</td><td class="rubber"><span class="rub">FriXion</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+    </tbody>
+  </table></div></div>
+  <p class="footnote">Kinder-/Verleih- und reine Auslaufmodelle sind nicht vollständig gelistet.</p>
+</section>
+
+<!-- ============ SCARPA ============ -->
+<section id="scarpa" data-brandsec>
+  <div class="sec-head"><span class="tag">Italien · Vibram XS · PCB-Tension</span><h2>Scarpa</h2></div>
+  <p class="sec-note">Stark in zwei Polen: ultraweiche Comp-Schuhe (Furia/Drago, oft ohne Mittelsohle) und präzise Kanten-Allrounder (Instinct VS, Boostic). PCB-Tension-Randsystem für Zugkraft auf die Zehen; legendäre Instinct-Ferse, die in vielen Modellen wiederkehrt.</p>
+  <div class="tablecard"><div class="scroll"><table>
+    <thead><tr><th class="sortable" data-sort="model">Modell</th><th class="sortable" data-sort="use">Performance / Einsatz</th><th class="sortable" data-sort="h">Härte</th><th class="sortable" data-sort="d">Downturn</th><th class="sortable" data-sort="a">Asym.</th><th class="sortable" data-sort="fit">Leisten / Fit</th><th class="sortable" data-sort="closure">Verschluss</th><th class="sortable" data-sort="rubber">Sohle / Gummi</th><th class="sortable" data-sort="niv">Niveau</th></tr></thead>
+    <tbody>
+      <tr data-shoe data-brand="scarpa" data-niv="pro" data-h="1" data-d="4" data-a="4" data-width="schmal" data-rubbercat="xsgrip2"><td class="model">Furia Air</td><td class="use">Comp/Gym, ultraweich, keine Mittelsohle, Schmieren</td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">LV · schmal</td><td class="closure">Slipper</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="pro" data-h="1" data-d="4" data-a="4" data-width="schmal" data-rubbercat="xsgrip2"><td class="model">Furia S</td><td class="use">Steiles Bouldern, sehr weich &amp; sensitiv</td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · schmal</td><td class="closure">Slipper</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="pro" data-h="2" data-d="4" data-a="4" data-width="schmal" data-rubbercat="xsgrip2"><td class="model">Drago<small>auch LV</small></td><td class="use">Steiles Boulder/Comp, weich, Top-Heel/Toe-Hooks</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV / LV · schmal</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="pro" data-h="3" data-d="4" data-a="4" data-width="schmal" data-rubbercat="xsgrip2"><td class="model">Drago XT</td><td class="use">Boulder mit etwas mehr Support als Drago</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · schmal</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="fort" data-h="4" data-d="3" data-a="4" data-width="mittel" data-rubbercat="xsedge"><td class="model">Instinct VS</td><td class="use">Sport/Boulder-Allround, präzises Kanten</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="fort" data-h="3" data-d="3" data-a="4" data-width="schmal" data-rubbercat="xsgrip2"><td class="model">Instinct VSR<small>auch LV</small></td><td class="use">Weichere/sensiblere Instinct-Variante</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV / LV · schmal</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="fort" data-h="4" data-d="3" data-a="4" data-width="mittel" data-rubbercat="xsedge"><td class="model">Instinct Lace</td><td class="use">Riss/Sport, präzise, Schnürung</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="fort" data-h="4" data-d="4" data-a="4" data-width="schmal" data-rubbercat="xsedge"><td class="model">Boostic</td><td class="use">Sport-Kanten, vorgespannt &amp; stützend</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · schmal</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="pro" data-h="2" data-d="4" data-a="4" data-width="schmal" data-rubbercat="xsgrip2"><td class="model">Mago</td><td class="use">Aggressiver Sport, sensitiv, XS Grip2</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · schmal</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="int" data-h="3" data-d="2" data-a="3" data-width="mittel" data-rubbercat="xsedge"><td class="model">Vapor V</td><td class="use">Allround Sport/Boulder, ausgewogen</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="int" data-h="3" data-d="2" data-a="3" data-width="mittel" data-rubbercat="xsedge"><td class="model">Vapor Lace</td><td class="use">Allround, Schnürung, etwas steifer/Kante</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="int" data-h="4" data-d="2" data-a="3" data-width="mittel" data-rubbercat="xsedge"><td class="model">Generator<small>auch Mid</small></td><td class="use">Allday-Sport/Mehrseil, Komfort + Kante</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="fort" data-h="5" data-d="1" data-a="2" data-width="mittel" data-rubbercat="xsedge"><td class="model">Maestro<small>Eco / Mid</small></td><td class="use">Trad/Riss, flach &amp; steif, Leder</td><td class="cell-num"><span class="chip v5">5</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">Vibram XS Edge</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="int" data-h="2" data-d="2" data-a="3" data-width="mittel" data-rubbercat="vision"><td class="model">Arpia</td><td class="use">Gym/Boulder-Allround, weich-sensitiv, bequem</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Vibram Vision</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="int" data-h="2" data-d="2" data-a="2" data-width="breit" data-rubbercat="vision"><td class="model">Veloce<small>auch L (Schnürung)</small></td><td class="use">Indoor/Gym &amp; Training, weich, komfortabel, Hooks</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel-breit</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Vibram Vision</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="scarpa" data-niv="ein" data-h="3" data-d="1" data-a="1" data-width="breit" data-rubbercat="vision"><td class="model">Origin / Helix / Force V</td><td class="use">Einsteiger Allround, flach, bequem &amp; günstig</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">NV–HV · mittel-breit</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">Vibram Vision</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+    </tbody>
+  </table></div></div>
+  <p class="footnote">LV-Varianten (Drago LV, Instinct VSR LV, Vapor V LV) sind für schmale/flache Füße. Damen-spezifische Leisten (Woman) bei vielen Modellen.</p>
+</section>
+
+<!-- ============ TENAYA ============ -->
+<section id="tenaya" data-brandsec>
+  <div class="sec-head"><span class="tag">Spanien · Draxtor · Split-Sole</span><h2>Tenaya</h2></div>
+  <p class="sec-note">Bekannt für hohen Tragekomfort bei voller Performance und das Draxtor-Lacing (versteckte Schnürung unter dem Klett für millimetergenauen Sitz). Sortiment traditionell eher schmal geschnitten – Ausnahmen: Mastia und Indalo mit breiterem Leisten.</p>
+  <div class="tablecard"><div class="scroll"><table>
+    <thead><tr><th class="sortable" data-sort="model">Modell</th><th class="sortable" data-sort="use">Performance / Einsatz</th><th class="sortable" data-sort="h">Härte</th><th class="sortable" data-sort="d">Downturn</th><th class="sortable" data-sort="a">Asym.</th><th class="sortable" data-sort="fit">Leisten / Fit</th><th class="sortable" data-sort="closure">Verschluss</th><th class="sortable" data-sort="rubber">Sohle / Gummi</th><th class="sortable" data-sort="niv">Niveau</th></tr></thead>
+    <tbody>
+      <tr data-shoe data-brand="tenaya" data-niv="pro" data-h="2" data-d="5" data-a="4" data-width="schmal" data-rubbercat="xsgrip2"><td class="model">Tarifa</td><td class="use">Aggressives Bouldern/Comp, weich, steiles Gelände</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v5">5</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · schmal</td><td class="closure">Klett + Draxtor</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="tenaya" data-niv="fort" data-h="3" data-d="4" data-a="4" data-width="mittel" data-rubbercat="xsgrip2"><td class="model">Indalo</td><td class="use">Aggressive Allround-Performance, Split-Sole, Hooks</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel (Mastia-DNA)</td><td class="closure">Klett + Draxtor</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="tenaya" data-niv="fort" data-h="4" data-d="3" data-a="5" data-width="breit" data-rubbercat="xsgrip"><td class="model">Mastia</td><td class="use">Techn. Allround, steife Front + sensitive Mitte</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v5">5</span></td><td class="fit">NV · breiter Leisten</td><td class="closure">Klett + Draxtor</td><td class="rubber"><span class="rub">Vibram XS Grip</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="tenaya" data-niv="fort" data-h="3" data-d="4" data-a="4" data-width="schmal" data-rubbercat="xsgrip"><td class="model">Iati</td><td class="use">Präzises Sport/Boulder, Kante + Sensitivität</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">LV · schmal, spitz</td><td class="closure">Klett + Draxtor</td><td class="rubber"><span class="rub">Vibram XS Grip</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="tenaya" data-niv="fort" data-h="3" data-d="3" data-a="3" data-width="mittel" data-rubbercat="xsgrip2"><td class="model">Mundaka</td><td class="use">Sensitives Allround (Oasi-Nachfolger), bessere Ferse</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett + Draxtor</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="tenaya" data-niv="fort" data-h="3" data-d="3" data-a="4" data-width="schmal" data-rubbercat="xsgrip"><td class="model">Oasi<small>auch LV</small></td><td class="use">Vielseitiges Allround, aggressiv aber komfortabel</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV / LV · schmal</td><td class="closure">Klett + Draxtor</td><td class="rubber"><span class="rub">Vibram XS Grip</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="tenaya" data-niv="int" data-h="2" data-d="3" data-a="3" data-width="mittel" data-rubbercat="xsgrip2"><td class="model">Ra</td><td class="use">Weiches Gym/Boulder, sensitiv, Schmieren</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett + Draxtor</td><td class="rubber"><span class="rub">Vibram XS Grip2</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="tenaya" data-niv="fort" data-h="4" data-d="2" data-a="3" data-width="mittel" data-rubbercat="xsgrip"><td class="model">Masai</td><td class="use">Kanten-Spezialist, flacher &amp; steifer, Technik</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett + Draxtor</td><td class="rubber"><span class="rub">Vibram XS Grip</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="tenaya" data-niv="ein" data-h="3" data-d="1" data-a="2" data-width="mittel" data-rubbercat="xsgrip"><td class="model">Inti / Tanta / Ras</td><td class="use">Einsteiger–Intermediate, bequem, Allround</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">Vibram XS Grip</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+    </tbody>
+  </table></div></div>
+  <p class="footnote">Hinweis: Oasi gilt vielfach als bester Allround-Einstieg in die Performance-Klasse; Mastia ist die Wahl für breitere Füße.</p>
+</section>
+
+<!-- ============ EVOLV ============ -->
+<section id="evolv" data-brandsec>
+  <div class="sec-head"><span class="tag">USA · TRAX · Love Bump · Knit</span><h2>evolv</h2></div>
+  <p class="sec-note">US-Marke mit ausgeprägtem Comp-/Boulder-Fokus. Markenzeichen: „Love Bump“ (Polster, das die Großzehe nach vorn drückt) und TRAX-Gummi. Phantom und Oracle sind die technischen Allrounder, Zenist/Geshido die weichen Wettkampf-Slipper.</p>
+  <div class="tablecard"><div class="scroll"><table>
+    <thead><tr><th class="sortable" data-sort="model">Modell</th><th class="sortable" data-sort="use">Performance / Einsatz</th><th class="sortable" data-sort="h">Härte</th><th class="sortable" data-sort="d">Downturn</th><th class="sortable" data-sort="a">Asym.</th><th class="sortable" data-sort="fit">Leisten / Fit</th><th class="sortable" data-sort="closure">Verschluss</th><th class="sortable" data-sort="rubber">Sohle / Gummi</th><th class="sortable" data-sort="niv">Niveau</th></tr></thead>
+    <tbody>
+      <tr data-shoe data-brand="evolv" data-niv="pro" data-h="3" data-d="4" data-a="4" data-width="schmal" data-rubbercat="trax"><td class="model">Phantom<small>auch LV</small></td><td class="use">Technische Allround-Performance, Sport/Boulder</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV / LV · schmal</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">TRAX SAS</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="evolv" data-niv="fort" data-h="3" data-d="5" data-a="4" data-width="mittel" data-rubbercat="trax"><td class="model">Shaman<small>auch LV / Damen Kira</small></td><td class="use">Aggressives Bouldern/Sport, steile Dächer</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v5">5</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">TRAX SAS</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="evolv" data-niv="pro" data-h="3" data-d="4" data-a="4" data-width="schmal" data-rubbercat="trax"><td class="model">Oracle</td><td class="use">Sensitives Kanten + Hooks, Knit-Upper, Allround</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">LV · schmal</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">TRAX SAS</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="evolv" data-niv="fort" data-h="2" data-d="5" data-a="4" data-width="mittel" data-rubbercat="trax"><td class="model">Agro</td><td class="use">Steiles Bouldern, weich, viel Gummi, Hooks</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v5">5</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">TRAX SAS</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="evolv" data-niv="pro" data-h="1" data-d="3" data-a="3" data-width="mittel" data-rubbercat="trax"><td class="model">Zenist<small>auch Pro</small></td><td class="use">Comp-Slipper, sehr weich, keine Mittelsohle</td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Slipper</td><td class="rubber"><span class="rub">TRAX SAS</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="evolv" data-niv="fort" data-h="2" data-d="3" data-a="3" data-width="schmal" data-rubbercat="trax"><td class="model">Geshido<small>auch LV</small></td><td class="use">Comp/Gym, weicher Slipper, dynamische Moves</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV / LV</td><td class="closure">Slipper/Klett</td><td class="rubber"><span class="rub">TRAX SAS</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="evolv" data-niv="int" data-h="4" data-d="3" data-a="3" data-width="mittel" data-rubbercat="trax"><td class="model">Kronos</td><td class="use">Allround Sport mit Kantenstütze</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">TRAX XT-5</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="evolv" data-niv="ein" data-h="3" data-d="1" data-a="1" data-width="breit" data-rubbercat="trax"><td class="model">Defy<small>Lace / Damen Elektra</small></td><td class="use">Einsteiger Allround, flach, synthetisch, bequem</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">HV · breit</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">TRAX XT-5</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+    </tbody>
+  </table></div></div>
+  <p class="footnote">Weitere: Supra, Rave (Einsteiger), Eldo. evolv-Slipper neigen über die Zeit zu deutlichem Nachgeben – eher knapp wählen.</p>
+</section>
+
+<!-- ============ FIVE TEN ============ -->
+<section id="fiveten" data-brandsec>
+  <div class="sec-head"><span class="tag">USA / adidas · Stealth-Gummi</span><h2>Five Ten</h2></div>
+  <p class="sec-note">Berühmt für Stealth-Gummi (C4 / Mi6 / HF) mit Top-Reibung. Die alte Anasazi-Reihe wurde durch die <b>NIAD</b>-Familie ersetzt. Hiangle und Crawe sind die zentralen Boulder/Sport-Modelle.</p>
+  <div class="callout"><b>Status-Hinweis:</b> Five Ten gehört zu adidas; die Verfügbarkeit der Kletterlinie ist zuletzt unbeständig geworden, einzelne Modelle laufen nur noch über Restbestände. Vor einem Kauf aktuelle Lieferbarkeit prüfen.</div>
+  <div class="tablecard" style="margin-top:16px"><div class="scroll"><table>
+    <thead><tr><th class="sortable" data-sort="model">Modell</th><th class="sortable" data-sort="use">Performance / Einsatz</th><th class="sortable" data-sort="h">Härte</th><th class="sortable" data-sort="d">Downturn</th><th class="sortable" data-sort="a">Asym.</th><th class="sortable" data-sort="fit">Leisten / Fit</th><th class="sortable" data-sort="closure">Verschluss</th><th class="sortable" data-sort="rubber">Sohle / Gummi</th><th class="sortable" data-sort="niv">Niveau</th></tr></thead>
+    <tbody>
+      <tr data-shoe data-brand="fiveten" data-niv="pro" data-h="2" data-d="4" data-a="4" data-width="mittel" data-rubbercat="stealth"><td class="model">Quantum<small>auch VCS</small></td><td class="use">Comp/Boulder, Knit, weich, dynamisch</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Slipper/Klett</td><td class="rubber"><span class="rub">Stealth HF</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="fiveten" data-niv="fort" data-h="2" data-d="4" data-a="4" data-width="mittel" data-rubbercat="stealth"><td class="model">Hiangle Pro</td><td class="use">Aggressives Bouldern, weicher &amp; stärker gespannt</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Stealth Mi6</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="fiveten" data-niv="int" data-h="3" data-d="3" data-a="3" data-width="mittel" data-rubbercat="stealth"><td class="model">Hiangle</td><td class="use">Boulder/Sport-Allround, gute Ferse, Split-Sole</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Stealth C4</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="fiveten" data-niv="fort" data-h="4" data-d="3" data-a="4" data-width="schmal" data-rubbercat="stealth"><td class="model">Aleon</td><td class="use">Sport/Boulder, Kante + Taschen, halb-steif (Primeknit)</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · schmal, spitz</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Stealth C4</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="fiveten" data-niv="fort" data-h="3" data-d="3" data-a="3" data-width="breit" data-rubbercat="stealth"><td class="model">Crawe</td><td class="use">Semi-aggressiv Sport/Boulder, sensitive Zehe + dicke Sohle</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · „Duck-Foot“ (breit vorn, flach)</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Stealth Mi6</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="fiveten" data-niv="fort" data-h="4" data-d="1" data-a="2" data-width="mittel" data-rubbercat="stealth"><td class="model">NIAD Lace</td><td class="use">Allround: Riss, Platte, Sport (Anasazi-Nachfolger)</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">Stealth C4</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="fiveten" data-niv="fort" data-h="4" data-d="2" data-a="3" data-width="mittel" data-rubbercat="stealth"><td class="model">NIAD VCS</td><td class="use">Allround, Klett-Version, präzises Kanten</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Stealth C4</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="fiveten" data-niv="int" data-h="2" data-d="1" data-a="1" data-width="mittel" data-rubbercat="stealth"><td class="model">NIAD Moccasym</td><td class="use">Riss/Slipper, weich anpassend, Leder</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">NV · anpassend</td><td class="closure">Slipper</td><td class="rubber"><span class="rub">Stealth C4</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="fiveten" data-niv="ein" data-h="3" data-d="1" data-a="1" data-width="breit" data-rubbercat="stealth"><td class="model">Kirigami</td><td class="use">Einsteiger Allround, bequem, flach</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">NV–HV · mittel</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">Stealth C4</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+    </tbody>
+  </table></div></div>
+</section>
+
+<!-- ============ MAD ROCK ============ -->
+<section id="madrock" data-brandsec>
+  <div class="sec-head"><span class="tag">USA · Arch Flex · Science Friction</span><h2>Mad Rock</h2></div>
+  <p class="sec-note">US-Marke (Südkalifornien) mit innovativem, betont preisgünstigem Ansatz. Charakteristisch: Arch-Flex-Band (formstabiler Downturn, ähnlich P3), 3D-geformte Ferse, konkave Zehenbox und das hauseigene Science-Friction-Gummi (SF3/R2). Drone und Shark sind die downgeturnten Performer, Remora der weiche Allround-Slipper.</p>
+  <div class="tablecard"><div class="scroll"><table>
+    <thead><tr><th class="sortable" data-sort="model">Modell</th><th class="sortable" data-sort="use">Performance / Einsatz</th><th class="sortable" data-sort="h">Härte</th><th class="sortable" data-sort="d">Downturn</th><th class="sortable" data-sort="a">Asym.</th><th class="sortable" data-sort="fit">Leisten / Fit</th><th class="sortable" data-sort="closure">Verschluss</th><th class="sortable" data-sort="rubber">Sohle / Gummi</th><th class="sortable" data-sort="niv">Niveau</th></tr></thead>
+    <tbody>
+      <tr data-shoe data-brand="madrock" data-niv="pro" data-h="2" data-d="4" data-a="4" data-width="mittel" data-rubbercat="sciencefriction"><td class="model">Drone CS</td><td class="use">Comp/Boulder, sehr weich &amp; sensitiv, 3D-Sohle</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Slipper/Klett</td><td class="rubber"><span class="rub">Science Friction 3.0</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="madrock" data-niv="fort" data-h="2" data-d="4" data-a="4" data-width="mittel" data-rubbercat="sciencefriction"><td class="model">Shark 2.0</td><td class="use">Aggressives Bouldern, weich-flexibel, sensitiv</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Science Friction 3.0</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="madrock" data-niv="fort" data-h="2" data-d="4" data-a="4" data-width="mittel" data-rubbercat="sciencefriction"><td class="model">Haywire</td><td class="use">Aggressives Sport/Boulder, weich, viel Gummi, Hooks</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Science Friction 3.0</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="madrock" data-niv="fort" data-h="3" data-d="4" data-a="4" data-width="mittel" data-rubbercat="sciencefriction"><td class="model">Drone HV<small>auch LV</small></td><td class="use">Aggressiver Allrounder, downturned, Arch-Flex</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">HV / LV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Science Friction 3.0</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="madrock" data-niv="fort" data-h="3" data-d="4" data-a="4" data-width="mittel" data-rubbercat="sciencefriction"><td class="model">Phoenix</td><td class="use">Aggressives Bouldern/Sport, downturned</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Science Friction 3.0</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="madrock" data-niv="fort" data-h="2" data-d="4" data-a="4" data-width="breit" data-rubbercat="sciencefriction"><td class="model">Rover</td><td class="use">Aggressives Bouldern/Sport, weich-flexibel, verzeihend</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">HV · breit, höheres Volumen</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Science Friction 3.0</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="madrock" data-niv="int" data-h="2" data-d="2" data-a="2" data-width="mittel" data-rubbercat="sciencefriction"><td class="model">Remora<small>auch HV / LV</small></td><td class="use">Slipper ohne Mittelsohle, Training/Mileage-Allround</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Slipper</td><td class="rubber"><span class="rub">Science Friction 3.0</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="madrock" data-niv="ein" data-h="3" data-d="1" data-a="1" data-width="breit" data-rubbercat="sciencefriction"><td class="model">Drifter</td><td class="use">Einsteiger, flach, stützend &amp; bequem</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">NV · mittel-breit</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">Science Friction 2.0</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+      <tr data-shoe data-brand="madrock" data-niv="ein" data-h="3" data-d="1" data-a="1" data-width="breit" data-rubbercat="sciencefriction"><td class="model">Flash 2.0</td><td class="use">Einsteiger-Klassiker, flach, robust, bequem</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">HV · breit</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Science Friction 2.0</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+    </tbody>
+  </table></div></div>
+  <p class="footnote">Weitere: Lyra (Damen-Performance), Agama (Comp), M5, Weaver. Made-in-California-Gummi; durchweg sehr gutes Preis-Leistungs-Verhältnis.</p>
+</section>
+
+
+<!-- ============ BOREAL ============ -->
+<section id="boreal" data-brandsec>
+  <div class="sec-head"><span class="tag">Spanien · Zenith-Gummi · Slip-Last</span><h2>Boreal</h2></div>
+  <p class="sec-note">Spanische Traditionsmarke – mit dem Fire (1987) Wegbereiter des modernen Reibungsgummi-Kletterschuhs. Fokus auf Komfort ohne Leistungsverlust; Zenith/Zenith-Pro-Gummi, der slip-lasted Ninja als sensitiver Klassiker, Dharma/Satori/Mutant als aggressive Performer.</p>
+  <div class="tablecard"><div class="scroll"><table>
+    <thead><tr><th class="sortable" data-sort="model">Modell</th><th class="sortable" data-sort="use">Performance / Einsatz</th><th class="sortable" data-sort="h">Härte</th><th class="sortable" data-sort="d">Downturn</th><th class="sortable" data-sort="a">Asym.</th><th class="sortable" data-sort="fit">Leisten / Fit</th><th class="sortable" data-sort="closure">Verschluss</th><th class="sortable" data-sort="rubber">Sohle / Gummi</th><th class="sortable" data-sort="niv">Niveau</th></tr></thead>
+    <tbody>
+      <tr data-shoe data-brand="boreal" data-niv="fort" data-h="2" data-d="4" data-a="4" data-width="mittel" data-rubbercat="zenith"><td class="model">Mutant</td><td class="use">Aggressives Bouldern, weich, downturned, viel Gummi</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Zenith Pro</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="boreal" data-niv="fort" data-h="3" data-d="4" data-a="4" data-width="schmal" data-rubbercat="zenith"><td class="model">Satori</td><td class="use">Aggressive Performance, präzise, downturned</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · schmal</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Zenith Pro</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="boreal" data-niv="fort" data-h="3" data-d="4" data-a="4" data-width="mittel" data-rubbercat="zenith"><td class="model">Dharma</td><td class="use">Aggressives Sport/Boulder, kraftvoll, downturned</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Zenith Pro</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="boreal" data-niv="fort" data-h="3" data-d="3" data-a="4" data-width="mittel" data-rubbercat="zenith"><td class="model">Lynx<small>auch Woman</small></td><td class="use">High-End Allround, vielseitig, präzise</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Zenith Pro</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="boreal" data-niv="int" data-h="2" data-d="2" data-a="3" data-width="mittel" data-rubbercat="zenith"><td class="model">Ninja</td><td class="use">Slip-Last, leicht &amp; sensitiv, weich, Klassiker</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Slipper</td><td class="rubber"><span class="rub">Zenith Pro</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="boreal" data-niv="int" data-h="3" data-d="2" data-a="3" data-width="mittel" data-rubbercat="zenith"><td class="model">Diabolo<small>auch Diabola (Damen)</small></td><td class="use">Allround Komfort + Performance, präzise Zehe</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Zenith Pro</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="boreal" data-niv="int" data-h="2" data-d="2" data-a="2" data-width="mittel" data-rubbercat="zenith"><td class="model">Joker<small>Plus / Lace</small></td><td class="use">Komfort-Performance-Allrounder, weich</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">Zenith</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="boreal" data-niv="int" data-h="3" data-d="2" data-a="2" data-width="mittel" data-rubbercat="zenith"><td class="model">Kintaro</td><td class="use">Intermediate-Allround, ausgewogen</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Zenith</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="boreal" data-niv="fort" data-h="4" data-d="1" data-a="2" data-width="mittel" data-rubbercat="zenith"><td class="model">Silex</td><td class="use">Trad/Mehrseil, steif &amp; flach, Komfort lange Routen</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">Zenith</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="boreal" data-niv="ein" data-h="3" data-d="1" data-a="1" data-width="breit" data-rubbercat="zenith"><td class="model">Crux</td><td class="use">Einsteiger, flach, bequem, robust</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">NV · mittel-breit</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">Zenith</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+    </tbody>
+  </table></div></div>
+  <p class="footnote">Weitere: Marduk (Intermediate), Ninja Junior (Kinder). Damen-Varianten u. a. Lynx Woman, Diabola.</p>
+</section>
+
+<!-- ============ OCÚN ============ -->
+<section id="ocun" data-brandsec>
+  <div class="sec-head"><span class="tag">Tschechien · CAT-Heel · Asymetrix-Last</span><h2>Ocún</h2></div>
+  <p class="sec-note">Tschechische Marke, bekannt für leistungsstarke Schuhe zu fairem Preis. Charakteristisch: CAT-Fersenkonstruktion, Asymetrix-Leisten (auch HV für breite Füße/hohen Spann) und kräftige Gummiränder. Ozone als Allround-Flaggschiff, Fury/Oxi/Havoc für modernes Bouldern.</p>
+  <div class="tablecard"><div class="scroll"><table>
+    <thead><tr><th class="sortable" data-sort="model">Modell</th><th class="sortable" data-sort="use">Performance / Einsatz</th><th class="sortable" data-sort="h">Härte</th><th class="sortable" data-sort="d">Downturn</th><th class="sortable" data-sort="a">Asym.</th><th class="sortable" data-sort="fit">Leisten / Fit</th><th class="sortable" data-sort="closure">Verschluss</th><th class="sortable" data-sort="rubber">Sohle / Gummi</th><th class="sortable" data-sort="niv">Niveau</th></tr></thead>
+    <tbody>
+      <tr data-shoe data-brand="ocun" data-niv="pro" data-h="2" data-d="4" data-a="4" data-width="mittel" data-rubbercat="cat"><td class="model">Fury</td><td class="use">Comp-Bouldern, weich, Toe/Heel-Hooks, Volumen</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Slipper/Klett</td><td class="rubber"><span class="rub">Ocún CAT 1.5</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="ocun" data-niv="fort" data-h="3" data-d="4" data-a="4" data-width="mittel" data-rubbercat="cat"><td class="model">Oxi<small>QC / LU (steifer)</small></td><td class="use">Performance-Bouldern, hoher Gummirand, Hooks</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">Ocún CAT 1.5</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="ocun" data-niv="fort" data-h="2" data-d="3" data-a="4" data-width="mittel" data-rubbercat="cat"><td class="model">Havoc</td><td class="use">Weiches Bouldern, Volumen + Präzision, bequem</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">Ocún CAT 1.5</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="ocun" data-niv="fort" data-h="3" data-d="3" data-a="4" data-width="breit" data-rubbercat="cat"><td class="model">Ozone<small>auch HV / Plus</small></td><td class="use">Allround-Flaggschiff, präzise Kante, asymmetrisch</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV / HV · mittel–breit</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Ocún CAT 1.5</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="ocun" data-niv="fort" data-h="4" data-d="2" data-a="3" data-width="mittel" data-rubbercat="cat"><td class="model">Diamond<small>S = weicher</small></td><td class="use">Kanten/Technik, kleine Tritte, präzise Fußarbeit</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Ocún CAT 1.1</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="ocun" data-niv="int" data-h="3" data-d="2" data-a="3" data-width="mittel" data-rubbercat="cat"><td class="model">Jett<small>QC / LU / S</small></td><td class="use">Vielseitiges Allround, ausgewogen</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">Ocún CAT 1.5</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="ocun" data-niv="int" data-h="3" data-d="2" data-a="2" data-width="mittel" data-rubbercat="cat"><td class="model">Strike<small>Striker QC / LU</small></td><td class="use">Allround, einsteigerfreundliche Performance</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">Ocún CAT 1.5</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="ocun" data-niv="ein" data-h="3" data-d="1" data-a="1" data-width="breit" data-rubbercat="cat"><td class="model">Advancer<small>auch Bullit / Rebel</small></td><td class="use">Einsteiger-Allround, bequem &amp; günstig</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">NV · mittel-breit</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">Ocún CAT</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+    </tbody>
+  </table></div></div>
+  <p class="footnote">Weitere: Sigma (Performance), Pearl/Iris/Oxy (Damen), Jett Crack (Riss), Ribbit (Kinder).</p>
+</section>
+
+
+<!-- ============ RED CHILI ============ -->
+<section id="redchili" data-brandsec>
+  <div class="sec-head"><span class="tag">Deutschland (Edelrid) · Vibram XS / RX</span><h2>Red Chili</h2></div>
+  <p class="sec-note">Deutsche Marke (seit der Fusion Teil von Edelrid). Bekannt für exzellente Passform und Vibram-XS-/hauseigenes RX-Gummi. Spirit ist der Komfort-Klassiker, Voltage/Mystix die aggressiven Performer, Fusion/Charger die downgeturnten Allrounder.</p>
+  <div class="tablecard"><div class="scroll"><table>
+    <thead><tr><th class="sortable" data-sort="model">Modell</th><th class="sortable" data-sort="use">Performance / Einsatz</th><th class="sortable" data-sort="h">Härte</th><th class="sortable" data-sort="d">Downturn</th><th class="sortable" data-sort="a">Asym.</th><th class="sortable" data-sort="fit">Leisten / Fit</th><th class="sortable" data-sort="closure">Verschluss</th><th class="sortable" data-sort="rubber">Sohle / Gummi</th><th class="sortable" data-sort="niv">Niveau</th></tr></thead>
+    <tbody>
+      <tr data-shoe data-brand="redchili" data-niv="pro" data-h="3" data-d="4" data-a="4" data-width="schmal" data-rubbercat="xsgrip"><td class="model">Mystix</td><td class="use">High-End, kraftvoller Downturn, steil/überhängend, präzise</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · schmal, spitz</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Vibram XS Grip</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="redchili" data-niv="fort" data-h="3" data-d="4" data-a="4" data-width="mittel" data-rubbercat="xsgrip"><td class="model">Voltage 2<small>auch LV / Lace</small></td><td class="use">Aggressive Präzision, downturned, Sport + Boulder</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Vibram XS Grip</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="redchili" data-niv="pro" data-h="2" data-d="4" data-a="4" data-width="mittel" data-rubbercat="xsgrip"><td class="model">Atomyc 2</td><td class="use">High-Performance-Slipper, max. Sensitivität, steiles Gelände</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Slipper</td><td class="rubber"><span class="rub">Vibram XS Grip</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="redchili" data-niv="fort" data-h="3" data-d="3" data-a="3" data-width="mittel" data-rubbercat="xsgrip"><td class="model">Fusion VCR</td><td class="use">Vielseitiger Performance-Allrounder, Spirit-Fit + Leistung</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett (innovativ)</td><td class="rubber"><span class="rub">Vibram XS Grip</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="redchili" data-niv="fort" data-h="3" data-d="3" data-a="3" data-width="mittel" data-rubbercat="xsgrip"><td class="model">Charger<small>auch LV</small></td><td class="use">Sport/Kante, downturned, kraftvoll</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">Vibram XS Grip</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="redchili" data-niv="fort" data-h="2" data-d="3" data-a="3" data-width="mittel" data-rubbercat="xsgrip"><td class="model">Sensor</td><td class="use">Besonders sensitiver Performance-Schuh</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett</td><td class="rubber"><span class="rub">Vibram XS Grip</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="redchili" data-niv="fort" data-h="2" data-d="3" data-a="3" data-width="mittel" data-rubbercat="xsgrip"><td class="model">Amp</td><td class="use">Leicht downturned Slipper, high-end technisch, ¾-Mittelsohle</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Slipper</td><td class="rubber"><span class="rub">Vibram XS Grip</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="redchili" data-niv="int" data-h="3" data-d="1" data-a="2" data-width="mittel" data-rubbercat="rx"><td class="model">Spirit VCR<small>Lace / LV</small></td><td class="use">Komfort-Allround-Klassiker, große Toe-Patch</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 2×</td><td class="rubber"><span class="rub">RX-2 Techgrip</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="redchili" data-niv="ein" data-h="3" data-d="2" data-a="2" data-width="breit" data-rubbercat="rx"><td class="model">Circuit</td><td class="use">Komfort + moderne Tritte, gemäßigter Downturn, viel Zehenraum</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel-breit</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">RX-1 Allround</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+    </tbody>
+  </table></div></div>
+  <p class="footnote">Weitere: Matador, Puzzle (Jugend/Eco), Sausalito (Komfort). Damen-Varianten u. a. Spirit LV.</p>
+</section>
+
+<!-- ============ UNPARALLEL ============ -->
+<section id="unparallel" data-brandsec>
+  <div class="sec-head"><span class="tag">USA (Kalifornien) · UP/RH-Gummi · Slingshot-Heel</span><h2>UnParallel</h2></div>
+  <p class="sec-note">US-Marke, 2017 vom ehemaligen Five-Ten-Produktionschef gegründet – über 20 Jahre Schuh-Knowhow aus Kalifornien, sehr griffiges UP/RH-Gummi. Flagship/TN Pro/Regulus als Performance-Speerspitze, viele LV-Varianten für schmale Füße.</p>
+  <div class="tablecard"><div class="scroll"><table>
+    <thead><tr><th class="sortable" data-sort="model">Modell</th><th class="sortable" data-sort="use">Performance / Einsatz</th><th class="sortable" data-sort="h">Härte</th><th class="sortable" data-sort="d">Downturn</th><th class="sortable" data-sort="a">Asym.</th><th class="sortable" data-sort="fit">Leisten / Fit</th><th class="sortable" data-sort="closure">Verschluss</th><th class="sortable" data-sort="rubber">Sohle / Gummi</th><th class="sortable" data-sort="niv">Niveau</th></tr></thead>
+    <tbody>
+      <tr data-shoe data-brand="unparallel" data-niv="pro" data-h="2" data-d="4" data-a="4" data-width="mittel" data-rubbercat="uprh"><td class="model">Flagship<small>auch Pro</small></td><td class="use">Aggressives Comp/Boulder, downturned, Split-Mittelsohle</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">UP RH</span></td><td><span class="niv n-pro">Profi/Elite</span></td></tr>
+      <tr data-shoe data-brand="unparallel" data-niv="fort" data-h="4" data-d="4" data-a="4" data-width="schmal" data-rubbercat="uprh"><td class="model">TN Pro<small>auch LV</small></td><td class="use">Tomoa-Narasaki-Signatur, steif + downturned, Slingshot-Heel, Allround</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV / LV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">UP RH 4.2</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="unparallel" data-niv="fort" data-h="4" data-d="3" data-a="4" data-width="mittel" data-rubbercat="uprh"><td class="model">Regulus<small>LV / Pro</small></td><td class="use">Steifer Downturn, Kante + Präzision, alle Winkel</td><td class="cell-num"><span class="chip v4">4</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v4">4</span></td><td class="fit">NV · mittel</td><td class="closure">Klett 1×</td><td class="rubber"><span class="rub">UP RH 4.2</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="unparallel" data-niv="fort" data-h="3" data-d="2" data-a="3" data-width="mittel" data-rubbercat="uprh"><td class="model">Sirius Lace<small>auch LV</small></td><td class="use">Vielseitig, Kante, ausgewogen</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">UP RH</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="unparallel" data-niv="int" data-h="3" data-d="2" data-a="3" data-width="mittel" data-rubbercat="uprh"><td class="model">Newtro<small>VCS / Lace</small></td><td class="use">Retro-Allround, gemäßigt</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v3">3</span></td><td class="fit">NV · mittel</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">UP RH</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="unparallel" data-niv="fort" data-h="5" data-d="1" data-a="2" data-width="mittel" data-rubbercat="uprh"><td class="model">UP Lace</td><td class="use">Flach &amp; sehr steif, Trad/Riss/Mehrseil</td><td class="cell-num"><span class="chip v5">5</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Schnürung</td><td class="rubber"><span class="rub">UP RH</span></td><td><span class="niv n-fort">Fortgeschritten</span></td></tr>
+      <tr data-shoe data-brand="unparallel" data-niv="int" data-h="2" data-d="1" data-a="1" data-width="mittel" data-rubbercat="uprh"><td class="model">UP Mocc</td><td class="use">Riss-Slipper, weich anpassend</td><td class="cell-num"><span class="chip v2">2</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="fit">NV · anpassend</td><td class="closure">Slipper</td><td class="rubber"><span class="rub">UP RH</span></td><td><span class="niv n-int">Intermediate</span></td></tr>
+      <tr data-shoe data-brand="unparallel" data-niv="ein" data-h="3" data-d="1" data-a="2" data-width="mittel" data-rubbercat="uprh"><td class="model">Engage<small>VCS / Knit / Lace</small></td><td class="use">Einsteiger-Allround, bequem</td><td class="cell-num"><span class="chip v3">3</span></td><td class="cell-num"><span class="chip v1">1</span></td><td class="cell-num"><span class="chip v2">2</span></td><td class="fit">NV · mittel</td><td class="closure">Klett/Schnür</td><td class="rubber"><span class="rub">UP RH</span></td><td><span class="niv n-ein">Einsteiger</span></td></tr>
+    </tbody>
+  </table></div></div>
+  <p class="footnote">Weitere: Leopard II, Souped Up, Vim, Qubit (Einsteiger). Nahezu alle Modelle als LV-Variante erhältlich.</p>
+</section>
+
+<!-- ============ MATRIX ============ -->
+<section id="matrix" class="matrix">
+  <div class="sec-head"><span class="tag">Quervergleich</span><h2>Äquivalenz-Matrix</h2></div>
+  <p class="sec-note">Welche Modelle der zehn Marken in dieselbe Kerbe schlagen – als Orientierung beim Wechsel zwischen Marken. <b>Fett</b> = häufige Top-Empfehlung der Kategorie. (Filter und Sortierung wirken auf die Marken­tabellen oben, nicht auf diese Matrix.)</p>
+  <div class="tablecard"><div class="scroll"><table>
+    <thead><tr><th>Kategorie</th><th>La Sportiva</th><th>Scarpa</th><th>Tenaya</th><th>evolv</th><th>Five Ten</th><th>Mad Rock</th><th>Boreal</th><th>Ocún</th><th>Red Chili</th><th>UnParallel</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Comp / weicher Slipper<br><small style="color:var(--ink-dim)">Halle, Volumen, Schmieren</small></td>
+        <td>Solution Comp, Theory, <b>Ondra Comp</b></td>
+        <td><b>Furia Air</b>, Furia S</td>
+        <td>Ra</td>
+        <td>Zenist, Geshido</td>
+        <td>Quantum</td>
+        <td>Drone CS</td>
+        <td>Ninja</td>
+        <td><b>Fury</b></td>
+        <td>Atomyc 2</td>
+        <td>Flagship</td>
+      </tr>
+      <tr>
+        <td>Aggressiv Bouldern<br><small style="color:var(--ink-dim)">steile Dächer, Hooks</small></td>
+        <td><b>Solution</b>, Skwama, Futura</td>
+        <td><b>Drago</b>, Mago</td>
+        <td>Tarifa, Indalo</td>
+        <td>Shaman, Agro, Phantom</td>
+        <td>Hiangle Pro</td>
+        <td>Shark 2.0, Haywire, Phoenix, Rover</td>
+        <td>Mutant, Dharma, Satori</td>
+        <td>Oxi, Havoc</td>
+        <td>Mystix, Voltage 2</td>
+        <td>Regulus</td>
+      </tr>
+      <tr>
+        <td>Sport-Allround / Kante<br><small style="color:var(--ink-dim)">präzises Edging, vertikal–leicht überhängend</small></td>
+        <td>Testarossa, Otaki, Kataki, <b>Miura VS</b></td>
+        <td><b>Instinct VS</b>, Boostic</td>
+        <td><b>Oasi</b>, Iati, Mastia</td>
+        <td>Oracle, Kronos</td>
+        <td>Aleon, Crawe, NIAD VCS</td>
+        <td>Drone HV/LV</td>
+        <td>Lynx</td>
+        <td><b>Ozone</b>, Diamond</td>
+        <td>Charger, Fusion VCR</td>
+        <td><b>TN Pro</b>, Sirius Lace</td>
+      </tr>
+      <tr>
+        <td>Allround-Klassiker<br><small style="color:var(--ink-dim)">vielseitig, Mehrseil, Fels</small></td>
+        <td><b>Katana Lace</b></td>
+        <td>Vapor V/Lace, Generator</td>
+        <td>Mundaka</td>
+        <td>—</td>
+        <td>NIAD Lace</td>
+        <td>Remora</td>
+        <td>Diabolo, Joker, Kintaro</td>
+        <td>Jett, Strike</td>
+        <td>Sensor</td>
+        <td>Newtro</td>
+      </tr>
+      <tr>
+        <td>Trad / Riss / Granit<br><small style="color:var(--ink-dim)">flach, steif, Allday</small></td>
+        <td><b>TC Pro</b>, Mythos, Cobra</td>
+        <td>Maestro, Instinct Lace</td>
+        <td>Masai</td>
+        <td>—</td>
+        <td>NIAD Moccasym</td>
+        <td>—</td>
+        <td>Silex</td>
+        <td>Oxi LU</td>
+        <td>—</td>
+        <td>UP Lace, UP Mocc</td>
+      </tr>
+      <tr>
+        <td>Komfort / Einsteiger<br><small style="color:var(--ink-dim)">erste Schuhe, ganztägig</small></td>
+        <td>Finale, Mistral, Aragon, HyperEZ, Tarantulace</td>
+        <td>Veloce, Origin, Helix</td>
+        <td>Inti, Tanta</td>
+        <td>Defy, Elektra</td>
+        <td>Kirigami</td>
+        <td>Flash 2.0, Drifter</td>
+        <td>Crux, Joker Plus</td>
+        <td>Advancer, Bullit</td>
+        <td>Spirit VCR, Circuit</td>
+        <td>Engage</td>
+      </tr>
+    </tbody>
+  </table></div></div>
+</section>
+
+<footer>
+  <p>Werte (Härte / Downturn / Asymmetrie) sind herstellerübergreifend kalibrierte Einschätzungen auf Basis von Herstellerangaben und gängigen Testberichten und dienen dem Vergleich – die individuelle Passform variiert je nach Fußform. „Alle“ Modelle bezieht sich auf das aktuell relevante Performance- und Komfortsortiment; reine Kinder-, Verleih- und Auslaufmodelle sind nicht vollständig gelistet. Stand: Juni 2026.</p>
+</footer>
+
+</div>
+
+<div class="cmp-tray" id="cmp-tray">
+  <div class="cmp-tray-inner">
+    <span class="lbl">Vergleich</span>
+    <div class="cmp-items" id="cmp-items"></div>
+    <span id="cmp-count" class="lbl"></span>
+    <button class="clr" id="cmp-clear" type="button">Leeren</button>
+    <button class="go" id="cmp-go" type="button" disabled>Vergleichen</button>
+  </div>
+</div>
+
+<div class="cmp-modal" id="cmp-modal" role="dialog" aria-modal="true" aria-label="Direktvergleich">
+  <div class="cmp-dialog">
+    <div class="cmp-dialog-head">
+      <h3>Direktvergleich</h3>
+      <button class="cmp-close" id="cmp-close" type="button" aria-label="Schließen">&times;</button>
+    </div>
+    <div id="cmp-body"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ---------- COMPARE COLUMN INJECTION ---------- */
+  var shoeTables=[];
+  document.querySelectorAll('table').forEach(function(table){
+    var tbody=table.querySelector('tbody');
+    if(!tbody || !tbody.querySelector('tr[data-shoe]')) return; /* skip matrix */
+    shoeTables.push(table);
+    var headRow=table.querySelector('thead tr');
+    var th=document.createElement('th');
+    th.className='cmp-h'; th.textContent='Vgl.';
+    headRow.insertBefore(th, headRow.firstChild);
+    Array.prototype.slice.call(tbody.querySelectorAll('tr[data-shoe]')).forEach(function(r){
+      var td=document.createElement('td'); td.className='cmp-c';
+      var cb=document.createElement('input');
+      cb.type='checkbox'; cb.className='cmp-box';
+      cb.setAttribute('aria-label','Zum Vergleich markieren');
+      td.appendChild(cb);
+      r.insertBefore(td, r.firstChild);
+      r._cmpBox=cb;
+      cb.addEventListener('change',function(){ onToggle(r,cb); });
+    });
+  });
+
+  /* ---------- COMPARE STATE ---------- */
+  var MAX=5;
+  var selected=[];
+  var tray=document.getElementById('cmp-tray');
+  var trayItems=document.getElementById('cmp-items');
+  var trayCount=document.getElementById('cmp-count');
+  var goBtn=document.getElementById('cmp-go');
+  var clrBtn=document.getElementById('cmp-clear');
+  var modal=document.getElementById('cmp-modal');
+  var modalBody=document.getElementById('cmp-body');
+  var modalClose=document.getElementById('cmp-close');
+  var BRANDS={lasportiva:'La Sportiva',scarpa:'Scarpa',tenaya:'Tenaya',evolv:'evolv',fiveten:'Five Ten',madrock:'Mad Rock',boreal:'Boreal',ocun:'Ocún',redchili:'Red Chili',unparallel:'UnParallel'};
+  var NIV={ein:['Einsteiger','n-ein'],int:['Intermediate','n-int'],fort:['Fortgeschritten','n-fort'],pro:['Profi/Elite','n-pro']};
+
+  function shoeName(r){ var m=r.querySelector('.model'); return (m&&m.childNodes[0])?m.childNodes[0].textContent.trim():''; }
+  function chip(v){ return '<span class="chip v'+v+'">'+v+'</span>'; }
+
+  function onToggle(r,cb){
+    if(cb.checked){
+      if(selected.length>=MAX){ cb.checked=false; flash(); return; }
+      if(selected.indexOf(r)===-1) selected.push(r);
+    } else {
+      var i=selected.indexOf(r); if(i>-1) selected.splice(i,1);
+    }
+    renderTray();
+  }
+  function flash(){ trayCount.textContent='max. '+MAX+' Schuhe'; trayCount.style.color='var(--accent)';
+    setTimeout(function(){ trayCount.style.color=''; renderTray(); },1200); }
+  function remove(r){ var i=selected.indexOf(r); if(i>-1) selected.splice(i,1); if(r._cmpBox) r._cmpBox.checked=false; renderTray(); }
+  function clearAll(){ selected.slice().forEach(remove); }
+
+  function renderTray(){
+    trayItems.innerHTML='';
+    selected.forEach(function(r){
+      var span=document.createElement('span'); span.className='cmp-item';
+      span.appendChild(document.createTextNode(shoeName(r)));
+      var x=document.createElement('button'); x.type='button'; x.innerHTML='&times;'; x.title='Entfernen';
+      x.addEventListener('click',function(){ remove(r); });
+      span.appendChild(x);
+      trayItems.appendChild(span);
+    });
+    trayCount.textContent=selected.length+'/'+MAX+' ausgewählt';
+    goBtn.disabled=selected.length<2;
+    if(selected.length>0){ tray.classList.add('show'); document.body.classList.add('tray-on'); }
+    else { tray.classList.remove('show'); document.body.classList.remove('tray-on'); }
+    if(modal.classList.contains('show')){ if(selected.length<2) closeModal(); else renderModal(); }
+  }
+
+  function renderModal(){
+    var attrs=[
+      ['Marke', function(r){ return BRANDS[r.getAttribute('data-brand')]||''; }],
+      ['Performance / Einsatz', function(r){ var e=r.querySelector('.use'); return e?e.textContent:''; }],
+      ['Härte', function(r){ return chip(r.getAttribute('data-h')); }],
+      ['Downturn', function(r){ return chip(r.getAttribute('data-d')); }],
+      ['Asymmetrie', function(r){ return chip(r.getAttribute('data-a')); }],
+      ['Leisten / Fit', function(r){ var e=r.querySelector('.fit'); return e?e.textContent:''; }],
+      ['Verschluss', function(r){ var e=r.querySelector('.closure'); return e?e.textContent:''; }],
+      ['Sohle / Gummi', function(r){ var e=r.querySelector('.rubber'); return e?e.innerHTML:''; }],
+      ['Niveau', function(r){ var n=NIV[r.getAttribute('data-niv')]; return n?'<span class="niv '+n[1]+'">'+n[0]+'</span>':''; }]
+    ];
+    var html='<table class="cmp-table"><thead><tr><th></th>';
+    selected.forEach(function(r){ html+='<th><span class="brandtag">'+(BRANDS[r.getAttribute('data-brand')]||'')+'</span>'+shoeName(r)+'</th>'; });
+    html+='</tr></thead><tbody>';
+    attrs.forEach(function(a){
+      html+='<tr><th>'+a[0]+'</th>';
+      selected.forEach(function(r){ html+='<td>'+a[1](r)+'</td>'; });
+      html+='</tr>';
+    });
+    html+='</tbody></table>';
+    modalBody.innerHTML=html;
+  }
+  function openModal(){ if(selected.length<2) return; renderModal(); modal.classList.add('show'); }
+  function closeModal(){ modal.classList.remove('show'); }
+
+  goBtn.addEventListener('click',openModal);
+  clrBtn.addEventListener('click',clearAll);
+  modalClose.addEventListener('click',closeModal);
+  modal.addEventListener('click',function(e){ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModal(); });
+
+  /* ---------- FILTER ---------- */
+  var q=document.getElementById('f-search');
+  var reset=document.getElementById('f-reset');
+  var count=document.getElementById('f-count');
+  var empty=document.getElementById('fb-empty');
+  var clearLink=document.getElementById('fb-clear');
+  var rows=Array.prototype.slice.call(document.querySelectorAll('tr[data-shoe]'));
+  var sections=Array.prototype.slice.call(document.querySelectorAll('section[data-brandsec]'));
+
+  /* brand multi-select chips */
+  var activeBrands={};
+  function brandCount(){ var n=0; for(var k in activeBrands){ if(activeBrands[k]) n++; } return n; }
+  var chips=Array.prototype.slice.call(document.querySelectorAll('.brandchips button'));
+  function syncChips(){
+    var any=brandCount()>0;
+    chips.forEach(function(c){
+      var b=c.getAttribute('data-b');
+      if(b==='all') c.classList.toggle('active', !any);
+      else c.classList.toggle('active', !!activeBrands[b]);
+    });
+  }
+  chips.forEach(function(c){
+    c.addEventListener('click',function(){
+      var b=c.getAttribute('data-b');
+      if(b==='all'){ activeBrands={}; } else { activeBrands[b]=!activeBrands[b]; }
+      syncChips(); apply();
+    });
+  });
+
+  /* custom multi-select dropdowns */
+  var msState={};
+  var msList=Array.prototype.slice.call(document.querySelectorAll('.ms'));
+  function msLabel(ms){
+    var key=ms.getAttribute('data-key'), base=ms.getAttribute('data-label'), st=msState[key]||{};
+    var n=0; for(var k in st){ if(st[k]) n++; }
+    var btn=ms.querySelector('.ms-btn');
+    btn.textContent = n? base+' ('+n+')' : base;
+    btn.classList.toggle('has', n>0);
+  }
+  msList.forEach(function(ms){
+    var key=ms.getAttribute('data-key'); msState[key]={};
+    ms.querySelector('.ms-btn').addEventListener('click',function(e){
+      e.stopPropagation();
+      var wasOpen=ms.classList.contains('open');
+      msList.forEach(function(o){ o.classList.remove('open'); });
+      if(!wasOpen) ms.classList.add('open');
+    });
+    Array.prototype.slice.call(ms.querySelectorAll('input[type=checkbox]')).forEach(function(cb){
+      cb.addEventListener('change',function(){ msState[key][cb.value]=cb.checked; msLabel(ms); apply(); });
+    });
+    ms.querySelector('.ms-panel').addEventListener('click',function(e){ e.stopPropagation(); });
+  });
+  document.addEventListener('click',function(){ msList.forEach(function(o){ o.classList.remove('open'); }); });
+
+  function passSet(key,val){
+    var st=msState[key]; if(!st) return true;
+    var any=false; for(var k in st){ if(st[k]){ any=true; break; } }
+    if(!any) return true;
+    return !!st[val];
+  }
+
+  function apply(){
+    var term=q.value.trim().toLowerCase();
+    var anyB=brandCount()>0, visible=0;
+    rows.forEach(function(r){
+      var ok=true;
+      if(anyB && !activeBrands[r.getAttribute('data-brand')]) ok=false;
+      if(ok && !passSet('niv', r.getAttribute('data-niv'))) ok=false;
+      if(ok && !passSet('h', r.getAttribute('data-h'))) ok=false;
+      if(ok && !passSet('d', r.getAttribute('data-d'))) ok=false;
+      if(ok && !passSet('a', r.getAttribute('data-a'))) ok=false;
+      if(ok && !passSet('width', r.getAttribute('data-width'))) ok=false;
+      if(ok && !passSet('rubber', r.getAttribute('data-rubbercat'))) ok=false;
+      if(ok && term && r.textContent.toLowerCase().indexOf(term)===-1) ok=false;
+      r.style.display = ok?'':'none';
+      if(ok) visible++;
+    });
+    sections.forEach(function(sec){
+      var vis=Array.prototype.slice.call(sec.querySelectorAll('tr[data-shoe]')).some(function(r){return r.style.display!=='none';});
+      sec.style.display = vis?'':'none';
+    });
+    empty.style.display = visible===0?'block':'none';
+    count.textContent = visible+(visible===1?' Modell':' Modelle');
+  }
+  q.addEventListener('input',apply);
+  function doReset(e){ if(e) e.preventDefault();
+    q.value=''; activeBrands={};
+    for(var key in msState){ msState[key]={}; }
+    msList.forEach(function(ms){
+      Array.prototype.slice.call(ms.querySelectorAll('input[type=checkbox]')).forEach(function(cb){ cb.checked=false; });
+      msLabel(ms);
+    });
+    syncChips(); apply();
+  }
+  reset.addEventListener('click',doReset);
+  clearLink.addEventListener('click',doReset);
+  syncChips(); apply();
+
+  /* ---------- SORT (per table) ---------- */
+  var nivRank={ein:1,int:2,fort:3,pro:4};
+  shoeTables.forEach(function(table){
+    var tbody=table.querySelector('tbody');
+    var ths=Array.prototype.slice.call(table.querySelectorAll('thead th'));
+    ths.forEach(function(th,idx){
+      if(!th.classList.contains('sortable')) return;
+      th.addEventListener('click',function(){
+        var type=th.getAttribute('data-sort')||'text';
+        var dir=th.getAttribute('data-dir')==='asc'?'desc':'asc';
+        ths.forEach(function(o){ o.removeAttribute('data-dir'); o.classList.remove('sorted-asc','sorted-desc'); });
+        th.setAttribute('data-dir',dir);
+        th.classList.add(dir==='asc'?'sorted-asc':'sorted-desc');
+        var trs=Array.prototype.slice.call(tbody.querySelectorAll('tr[data-shoe]'));
+        trs.sort(function(a,b){
+          var av,bv;
+          if(type==='h'||type==='d'||type==='a'){ av=parseInt(a.getAttribute('data-'+type),10); bv=parseInt(b.getAttribute('data-'+type),10); }
+          else if(type==='niv'){ av=nivRank[a.getAttribute('data-niv')]||0; bv=nivRank[b.getAttribute('data-niv')]||0; }
+          else { av=(a.children[idx]?a.children[idx].textContent:'').trim().toLowerCase(); bv=(b.children[idx]?b.children[idx].textContent:'').trim().toLowerCase(); }
+          if(av<bv) return dir==='asc'?-1:1; if(av>bv) return dir==='asc'?1:-1; return 0;
+        });
+        trs.forEach(function(r){ tbody.appendChild(r); });
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
