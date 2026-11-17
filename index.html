@@ -12,6 +12,7 @@
     --bg:#11100d; --panel:#1a1813; --panel-2:#211e18;
     --ink:#f2ede1; --ink-dim:#b7ad97; --line:#312c23;
     --accent:#e0723a; --accent-2:#c9a227;
+    --sel:#efe9dc; --sel-ink:#14130f; --link:#ec8c5c;
     --s1:#3f7d52; --s2:#6b9540; --s3:#c9a227; --s4:#d97a2c; --s5:#c0432b;
     --s1b:#16241b; --s2b:#22281a; --s3b:#2c2614; --s4b:#2e2113; --s5b:#2b1714;
   }
@@ -47,21 +48,29 @@
   .niv-key{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 
   .filterbar{position:sticky;top:0;z-index:60;margin-top:26px;
-    background:rgba(20,18,14,.86);backdrop-filter:blur(10px);
+    background:rgba(20,18,14,.9);backdrop-filter:blur(10px);
     border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .fb-inner{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:14px 22px}
-  .fb-inner input,.fb-inner select{
-    font-family:'Archivo',sans-serif;font-size:.84rem;color:var(--ink);
-    background:var(--panel-2);border:1px solid var(--line);border-radius:9px;
-    padding:9px 12px;outline:none;transition:.15s}
-  .fb-inner input{flex:1 1 200px;min-width:160px}
-  .fb-inner input::placeholder{color:var(--ink-dim)}
-  .fb-inner select{cursor:pointer}
-  .fb-inner input:focus,.fb-inner select:focus{border-color:var(--accent)}
-  #f-reset{cursor:pointer;background:var(--accent);color:#1a1208;border:none;font-weight:700;
-    font-size:.8rem;padding:9px 16px;border-radius:9px;transition:.15s}
-  #f-reset:hover{filter:brightness(1.08)}
-  #f-count{font-size:.78rem;color:var(--ink-dim);font-weight:600;margin-left:auto;white-space:nowrap}
+  .fb-inner{display:flex;flex-direction:column;gap:10px;padding:12px 22px}
+  .fb-row{display:flex;gap:10px;align-items:center}
+  #f-search{flex:1;min-width:0;font-family:'Archivo',sans-serif;font-size:.9rem;color:var(--ink);
+    background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:none;transition:.15s}
+  #f-search::placeholder{color:var(--ink-dim)}
+  #f-search:focus{border-color:var(--sel)}
+  .fbtn{display:inline-flex;align-items:center;gap:7px;flex:none;font-family:'Archivo',sans-serif;font-size:.9rem;font-weight:700;
+    color:var(--ink);background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:.15s}
+  .fbtn:hover{border-color:var(--sel)}
+  .fbtn .fcount{background:var(--sel);color:var(--sel-ink);border-radius:99px;font-size:.7rem;font-weight:800;padding:1px 7px}
+  .fb-scroll{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+  .fb-active{display:flex;gap:6px;flex-wrap:wrap}
+  .fb-active:empty{display:none}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-family:'Archivo',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink);
+    background:#2b2720;border:1px solid transparent;border-radius:8px;padding:5px 8px 5px 10px;cursor:pointer}
+  .pill span{color:var(--ink-dim);font-size:1rem;line-height:1}
+  .pill:hover{border-color:var(--line)}.pill:hover span{color:var(--ink)}
+  .fb-meta{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:.8rem;color:var(--ink-dim)}
+  #f-count b{color:var(--ink)}
+  .fb-link{color:var(--link);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+  .fb-link[hidden]{display:none}
   .fb-empty{display:none;text-align:center;color:var(--ink-dim);padding:50px 20px;font-size:.95rem}
 
   section{margin-top:50px;scroll-margin-top:78px}
@@ -112,25 +121,36 @@
   @media(max-width:640px){
     header{padding:44px 0 24px}
     .wrap{padding:0 15px}
-    .fb-inner{padding:12px 15px}
-    #f-count{margin-left:0;width:100%}
+    .fb-inner{padding:10px 15px}
+    .fb-scroll{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -15px;padding:0 15px}
+    .fb-scroll::-webkit-scrollbar{display:none}
+    .fb-scroll>*{flex:none}
     .chip{width:26px;height:26px;font-size:.82rem}
   }
 
-  /* ---- brand multi-select chips ---- */
-  .brandchips{display:flex;flex-wrap:wrap;gap:6px;flex-basis:100%}
-  .brandchips button{font-family:'Archivo',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink-dim);
-    background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer;transition:.15s}
-  .brandchips button:hover{border-color:var(--accent);color:var(--ink)}
-  .brandchips button.active{background:var(--accent);color:#1a1208;border-color:var(--accent)}
+  /* ---- Marken-Chips & Schalter (Auswahl = hell, nie Orange) ---- */
+  .brandchips{display:contents}
+  .brandchips button,.fopt{font-family:'Archivo',sans-serif;font-size:.8rem;font-weight:600;color:var(--ink-dim);white-space:nowrap;
+    background:transparent;border:1px solid #3a352c;border-radius:999px;padding:6px 13px;cursor:pointer;transition:.15s}
+  .brandchips button:hover,.fopt:hover{border-color:var(--ink-dim);color:var(--ink)}
+  .brandchips button[aria-pressed="true"],.fopt[aria-pressed="true"]{background:var(--sel);color:var(--sel-ink);border-color:var(--sel)}
+  .brandchips button[aria-pressed="true"]::before,.fopt[aria-pressed="true"]::before{content:"\2713\00a0";font-weight:800}
+  .tog{display:inline-flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-size:.8rem;font-weight:600;color:var(--ink-dim);white-space:nowrap;
+    background:transparent;border:1px solid #3a352c;border-radius:999px;padding:4px 12px 4px 5px;cursor:pointer;transition:.15s}
+  .tog:hover{border-color:var(--ink-dim);color:var(--ink)}
+  .tog .sw{width:30px;height:18px;border-radius:99px;background:#3a352c;position:relative;transition:.15s;flex:none}
+  .tog .sw::after{content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:var(--ink-dim);top:2px;left:2px;transition:.15s}
+  .tog[aria-checked="true"]{color:var(--ink)}
+  .tog[aria-checked="true"] .sw{background:var(--accent-2)}
+  .tog[aria-checked="true"] .sw::after{left:14px;background:var(--sel-ink)}
 
   /* ---- compare checkbox column ---- */
   th.cmp-h{width:42px;text-align:center;font-size:.62rem;color:var(--ink-dim)}
   td.cmp-c{width:42px;text-align:center}
   .cmp-box{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1.5px solid var(--line);
     border-radius:6px;background:var(--panel-2);cursor:pointer;position:relative;transition:.15s;vertical-align:middle}
-  .cmp-box:hover{border-color:var(--accent)}
-  .cmp-box:checked{background:var(--accent);border-color:var(--accent)}
+  .cmp-box:hover{border-color:var(--ink-dim)}
+  .cmp-box:checked{background:var(--sel);border-color:var(--sel)}
   .cmp-box:checked::after{content:"\2713";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#1a1208;font-size:.8rem;font-weight:900}
 
   /* ---- compare tray ---- */
@@ -166,33 +186,45 @@
   .cmp-table tbody th{font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-dim);font-weight:600;white-space:nowrap;background:var(--panel);width:140px}
   .cmp-table .brandtag{font-size:.7rem;color:var(--accent);font-weight:600;display:block;margin-bottom:3px}
 
-  /* ---- multi-select dropdown ---- */
-  .ms{position:relative}
-  .ms-btn{font-family:'Archivo',sans-serif;font-size:.84rem;font-weight:600;color:var(--ink-dim);background:var(--panel-2);
-    border:1px solid var(--line);border-radius:9px;padding:9px 28px 9px 12px;cursor:pointer;white-space:nowrap;position:relative;transition:.15s}
-  .ms-btn::after{content:"\25BE";position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:.7em;color:var(--ink-dim)}
-  .ms-btn:hover{border-color:var(--accent);color:var(--ink)}
-  .ms-btn.has{border-color:var(--accent);color:var(--accent)}
-  .ms-panel{display:none;position:absolute;top:calc(100% + 6px);left:0;z-index:80;background:var(--panel);
-    border:1px solid var(--line);border-radius:11px;padding:7px;min-width:185px;box-shadow:0 14px 34px rgba(0,0,0,.45);max-height:300px;overflow:auto}
-  .ms.open .ms-panel{display:block}
-  .ms-panel label{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:7px;font-size:.83rem;color:var(--ink);cursor:pointer}
-  .ms-panel label:hover{background:var(--panel-2)}
-  .ms-panel input{appearance:none;-webkit-appearance:none;width:17px;height:17px;border:1.5px solid var(--line);border-radius:5px;
-    background:var(--panel-2);cursor:pointer;position:relative;flex:none;transition:.12s}
-  .ms-panel input:checked{background:var(--accent);border-color:var(--accent)}
-  .ms-panel input:checked::after{content:"\2713";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#1a1208;font-size:.7rem;font-weight:900}
-  .ms-panel .num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;font-weight:700;font-size:.78rem;margin-right:2px}
+  /* ---- Filter-Sheet (mobil: von unten, Desktop: zentriert) ---- */
+  .fsheet{position:fixed;inset:0;z-index:110;display:flex;align-items:flex-end;justify-content:center;background:rgba(8,7,5,.62);backdrop-filter:blur(3px)}
+  .fsheet[hidden]{display:none}
+  .fsheet-panel{background:var(--panel);border:1px solid var(--line);border-bottom:none;border-radius:20px 20px 0 0;width:100%;max-width:620px;
+    max-height:88vh;display:flex;flex-direction:column;box-shadow:0 -12px 40px rgba(0,0,0,.5);animation:fsUp .22s ease}
+  @keyframes fsUp{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+  .fsheet .grab{width:40px;height:4px;border-radius:9px;background:#3a352c;margin:9px auto 0}
+  .fsheet-head{display:flex;justify-content:space-between;align-items:center;padding:10px 20px 6px}
+  .fsheet-head h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900}
+  .fsheet-head .x{background:none;border:1px solid var(--line);color:var(--ink);width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:1.1rem;margin-left:12px}
+  .fsheet-body{overflow:auto;padding:0 20px 14px}
+  .fgroup h4{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-dim);font-weight:600;margin:18px 0 9px}
+  .fgroup h4 em{font-style:normal;letter-spacing:.04em;text-transform:none;opacity:.8}
+  .fgroup .opts{display:flex;flex-wrap:wrap;gap:7px}
+  .seg{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid #3a352c;border-radius:10px;overflow:hidden}
+  .seg button{font-family:'Archivo',sans-serif;font-size:.92rem;font-weight:700;color:var(--ink-dim);background:transparent;border:none;
+    border-right:1px solid #3a352c;padding:10px 0 8px;cursor:pointer;position:relative;transition:.12s}
+  .seg button:last-child{border-right:none}
+  .seg button::after{content:"";position:absolute;left:30%;right:30%;bottom:4px;height:3px;border-radius:3px;background:var(--c)}
+  .seg button:hover{color:var(--ink)}
+  .seg button[aria-pressed="true"]{background:var(--sel);color:var(--sel-ink)}
+  .fsheet-foot{padding:12px 20px 16px;border-top:1px solid var(--line)}
+  .fsheet-go{width:100%;font-family:'Archivo',sans-serif;background:var(--accent);color:#1a1208;border:none;border-radius:12px;padding:14px;
+    font-size:1rem;font-weight:800;cursor:pointer;transition:.15s}
+  .fsheet-go:hover{filter:brightness(1.08)}
+  body.sheet-on{overflow:hidden}
+  .filterbar button,.fsheet button,.pill{-webkit-tap-highlight-color:transparent}
+  .filterbar button:focus-visible,.fsheet button:focus-visible,.fb-link:focus-visible,#f-search:focus-visible{outline:2px solid var(--sel);outline-offset:2px}
+  @media(min-width:700px){
+    .fsheet{align-items:center;padding:24px}
+    .fsheet-panel{border-radius:18px;border-bottom:1px solid var(--line);max-height:86vh}
+    .fsheet .grab{display:none}
+  }
   td.rubber{font-size:.78rem}
   .rub{display:inline-block;font-size:.72rem;font-weight:600;color:var(--ink);background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:3px 8px;white-space:nowrap}
   /* ---- Neuheiten-Badge + Toggle ---- */
   .newbadge{display:inline-block;margin-left:7px;vertical-align:2px;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
     color:#1a1208;background:var(--accent-2);border-radius:5px;padding:2px 6px}
   .newbadge.ann{background:transparent;color:var(--accent-2);box-shadow:inset 0 0 0 1px var(--accent-2)}
-  #f-new{font-family:'Archivo',sans-serif;font-size:.84rem;font-weight:600;color:var(--ink-dim);cursor:pointer;
-    background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:9px 12px;transition:.15s}
-  #f-new:hover{border-color:var(--accent);color:var(--ink)}
-  #f-new[aria-pressed="true"]{background:var(--accent-2);color:#1a1208;border-color:var(--accent-2)}
   .cmp-table a.src{color:var(--accent);font-size:.78rem;word-break:break-all}
 </style>
 </head>
@@ -267,97 +299,34 @@
 <!-- ============ FILTER BAR ============ -->
 <div class="filterbar">
   <div class="wrap fb-inner">
-    <input id="f-search" type="text" placeholder="Suche: Modell, Einsatz, Verschluss …" aria-label="Textsuche">
-    <div class="brandchips" id="f-brand" aria-label="Marke">
-      <button type="button" data-b="all" class="active">Alle Marken</button>
-      <button type="button" data-b="lasportiva">La Sportiva</button>
-      <button type="button" data-b="scarpa">Scarpa</button>
-      <button type="button" data-b="tenaya">Tenaya</button>
-      <button type="button" data-b="evolv">evolv</button>
-      <button type="button" data-b="fiveten">Five Ten</button>
-      <button type="button" data-b="madrock">Mad Rock</button>
-      <button type="button" data-b="boreal">Boreal</button>
-      <button type="button" data-b="ocun">Ocún</button>
-      <button type="button" data-b="redchili">Red Chili</button>
-      <button type="button" data-b="unparallel">UnParallel</button>
-      <button type="button" data-b="blackdiamond">Black Diamond</button>
-      <button type="button" data-b="simond">Simond</button>
+    <div class="fb-row">
+      <input id="f-search" type="search" placeholder="Suche: Modell, Einsatz, Verschluss …" aria-label="Textsuche">
+      <button id="f-open" type="button" class="fbtn" aria-haspopup="dialog" aria-controls="f-sheet">Filter <span class="fcount" id="f-open-count" hidden></span></button>
     </div>
-        <div class="ms" data-key="niv" data-label="Niveau">
-      <button type="button" class="ms-btn">Niveau</button>
-      <div class="ms-panel">
-        <label><input type="checkbox" value="ein">Einsteiger</label>
-        <label><input type="checkbox" value="int">Intermediate</label>
-        <label><input type="checkbox" value="fort">Fortgeschritten</label>
-        <label><input type="checkbox" value="pro">Profi/Elite</label>
+    <div class="fb-scroll" aria-label="Schnellfilter">
+      <button id="f-new" type="button" class="tog" role="switch" aria-checked="false" title="Nur Modelle zeigen, die im Modelljahr 2026 neu/überarbeitet oder bereits angekündigt sind"><span class="sw"></span>Nur Neuheiten</button>
+      <div class="brandchips" id="f-brand" role="group" aria-label="Marken">
+        <button type="button" data-b="lasportiva" aria-pressed="false">La Sportiva</button>
+        <button type="button" data-b="scarpa" aria-pressed="false">Scarpa</button>
+        <button type="button" data-b="tenaya" aria-pressed="false">Tenaya</button>
+        <button type="button" data-b="evolv" aria-pressed="false">evolv</button>
+        <button type="button" data-b="fiveten" aria-pressed="false">Five Ten</button>
+        <button type="button" data-b="madrock" aria-pressed="false">Mad Rock</button>
+        <button type="button" data-b="boreal" aria-pressed="false">Boreal</button>
+        <button type="button" data-b="ocun" aria-pressed="false">Ocún</button>
+        <button type="button" data-b="redchili" aria-pressed="false">Red Chili</button>
+        <button type="button" data-b="unparallel" aria-pressed="false">UnParallel</button>
+        <button type="button" data-b="blackdiamond" aria-pressed="false">Black Diamond</button>
+        <button type="button" data-b="simond" aria-pressed="false">Simond</button>
       </div>
     </div>
-    <div class="ms" data-key="h" data-label="Härte">
-      <button type="button" class="ms-btn">Härte</button>
-      <div class="ms-panel">
-        <label><input type="checkbox" value="1"><span class="num v1">1</span>sehr weich</label>
-        <label><input type="checkbox" value="2"><span class="num v2">2</span>weich</label>
-        <label><input type="checkbox" value="3"><span class="num v3">3</span>mittel</label>
-        <label><input type="checkbox" value="4"><span class="num v4">4</span>steif</label>
-        <label><input type="checkbox" value="5"><span class="num v5">5</span>sehr steif</label>
-      </div>
-    </div>
-    <div class="ms" data-key="d" data-label="Downturn">
-      <button type="button" class="ms-btn">Downturn</button>
-      <div class="ms-panel">
-        <label><input type="checkbox" value="1"><span class="num v1">1</span>flach</label>
-        <label><input type="checkbox" value="2"><span class="num v2">2</span>leicht</label>
-        <label><input type="checkbox" value="3"><span class="num v3">3</span>mittel</label>
-        <label><input type="checkbox" value="4"><span class="num v4">4</span>aggressiv</label>
-        <label><input type="checkbox" value="5"><span class="num v5">5</span>sehr aggressiv</label>
-      </div>
-    </div>
-    <div class="ms" data-key="a" data-label="Asymmetrie">
-      <button type="button" class="ms-btn">Asymmetrie</button>
-      <div class="ms-panel">
-        <label><input type="checkbox" value="1"><span class="num v1">1</span>symmetrisch</label>
-        <label><input type="checkbox" value="2"><span class="num v2">2</span>leicht</label>
-        <label><input type="checkbox" value="3"><span class="num v3">3</span>mittel</label>
-        <label><input type="checkbox" value="4"><span class="num v4">4</span>spitz</label>
-        <label><input type="checkbox" value="5"><span class="num v5">5</span>sehr spitz</label>
-      </div>
-    </div>
-    <div class="ms" data-key="width" data-label="Leisten">
-      <button type="button" class="ms-btn">Leisten</button>
-      <div class="ms-panel">
-        <label><input type="checkbox" value="schmal">schmal / LV</label>
-        <label><input type="checkbox" value="mittel">mittel / NV</label>
-        <label><input type="checkbox" value="breit">breit / HV</label>
-      </div>
-    </div>
-    <div class="ms" data-key="rubber" data-label="Gummi">
-      <button type="button" class="ms-btn">Gummi</button>
-      <div class="ms-panel">
-        <label><input type="checkbox" value="xsgrip2">Vibram XS Grip2</label>
-        <label><input type="checkbox" value="xsgrip">Vibram XS Grip</label>
-        <label><input type="checkbox" value="xsedge">Vibram XS Edge</label>
-        <label><input type="checkbox" value="vision">Vibram Vision</label>
-        <label><input type="checkbox" value="frixion">FriXion (LS)</label>
-        <label><input type="checkbox" value="stealth">Stealth (5.10)</label>
-        <label><input type="checkbox" value="trax">TRAX (evolv)</label>
-        <label><input type="checkbox" value="sciencefriction">Science Friction</label>
-        <label><input type="checkbox" value="xtremefriction">Xtreme Friction (Mad Rock)</label>
-        <label><input type="checkbox" value="zenith">Zenith (Boreal)</label>
-        <label><input type="checkbox" value="cat">Ocún CAT</label>
-        <label><input type="checkbox" value="rx">Red Chili RX</label>
-        <label><input type="checkbox" value="uprh">UnParallel RH/RA</label>
-        <label><input type="checkbox" value="bd">Black Diamond (Black Label)</label>
-        <label><input type="checkbox" value="andere">Sonstige / k. A.</label>
-      </div>
-    </div>
-    <button id="f-new" type="button" aria-pressed="false" title="Nur Modelle zeigen, die im Modelljahr 2026 neu/überarbeitet oder bereits angekündigt sind">Nur Neuheiten</button>
-    <button id="f-reset" type="button">Zurücksetzen</button>
-    <span id="f-count"></span>
+    <div class="fb-active" id="f-active" aria-label="Aktive Filter"></div>
+    <div class="fb-meta"><span id="f-count" aria-live="polite"></span><a href="#" id="f-reset" class="fb-link" hidden>Alle Filter löschen</a></div>
   </div>
 </div>
 
 <div class="wrap">
-<p class="fb-empty" id="fb-empty">Keine Modelle entsprechen den gewählten Filtern. <a href="#" id="fb-clear" style="color:var(--accent)">Filter zurücksetzen</a></p>
+<p class="fb-empty" id="fb-empty">Keine Modelle entsprechen den gewählten Filtern. <a href="#" id="fb-clear" class="fb-link">Filter zurücksetzen</a></p>
 
 <!-- ============ LA SPORTIVA ============ -->
 <section id="lasportiva" data-brandsec>
@@ -744,6 +713,22 @@
 
 </div>
 
+<div class="fsheet" id="f-sheet" role="dialog" aria-modal="true" aria-labelledby="f-sheet-title" hidden>
+  <div class="fsheet-panel">
+    <div class="grab"></div>
+    <div class="fsheet-head"><h3 id="f-sheet-title">Filter</h3><span><a href="#" id="f-sheet-reset" class="fb-link">Zurücksetzen</a><button type="button" class="x" id="f-sheet-close" aria-label="Schließen">&times;</button></span></div>
+    <div class="fsheet-body">
+      <div class="fgroup" data-key="niv" data-label="Niveau"><h4>Niveau</h4><div class="opts"><button type="button" class="fopt" data-v="ein" aria-pressed="false">Einsteiger</button><button type="button" class="fopt" data-v="int" aria-pressed="false">Intermediate</button><button type="button" class="fopt" data-v="fort" aria-pressed="false">Fortgeschritten</button><button type="button" class="fopt" data-v="pro" aria-pressed="false">Profi/Elite</button></div></div>
+      <div class="fgroup" data-key="h" data-label="Härte" data-scale><h4>Härte · <em>weich → steif</em></h4><div class="seg"><button type="button" data-v="1" aria-pressed="false" style="--c:var(--s1)">1</button><button type="button" data-v="2" aria-pressed="false" style="--c:var(--s2)">2</button><button type="button" data-v="3" aria-pressed="false" style="--c:var(--s3)">3</button><button type="button" data-v="4" aria-pressed="false" style="--c:var(--s4)">4</button><button type="button" data-v="5" aria-pressed="false" style="--c:var(--s5)">5</button></div></div>
+      <div class="fgroup" data-key="d" data-label="Downturn" data-scale><h4>Downturn · <em>flach → aggressiv</em></h4><div class="seg"><button type="button" data-v="1" aria-pressed="false" style="--c:var(--s1)">1</button><button type="button" data-v="2" aria-pressed="false" style="--c:var(--s2)">2</button><button type="button" data-v="3" aria-pressed="false" style="--c:var(--s3)">3</button><button type="button" data-v="4" aria-pressed="false" style="--c:var(--s4)">4</button><button type="button" data-v="5" aria-pressed="false" style="--c:var(--s5)">5</button></div></div>
+      <div class="fgroup" data-key="a" data-label="Asymmetrie" data-scale><h4>Asymmetrie · <em>symmetrisch → spitz</em></h4><div class="seg"><button type="button" data-v="1" aria-pressed="false" style="--c:var(--s1)">1</button><button type="button" data-v="2" aria-pressed="false" style="--c:var(--s2)">2</button><button type="button" data-v="3" aria-pressed="false" style="--c:var(--s3)">3</button><button type="button" data-v="4" aria-pressed="false" style="--c:var(--s4)">4</button><button type="button" data-v="5" aria-pressed="false" style="--c:var(--s5)">5</button></div></div>
+      <div class="fgroup" data-key="width" data-label="Leisten"><h4>Leisten</h4><div class="opts"><button type="button" class="fopt" data-v="schmal" aria-pressed="false">schmal / LV</button><button type="button" class="fopt" data-v="mittel" aria-pressed="false">mittel / NV</button><button type="button" class="fopt" data-v="breit" aria-pressed="false">breit / HV</button></div></div>
+      <div class="fgroup" data-key="rubber" data-label="Gummi"><h4>Gummi</h4><div class="opts"><button type="button" class="fopt" data-v="xsgrip2" aria-pressed="false">Vibram XS Grip2</button><button type="button" class="fopt" data-v="xsgrip" aria-pressed="false">Vibram XS Grip</button><button type="button" class="fopt" data-v="xsedge" aria-pressed="false">Vibram XS Edge</button><button type="button" class="fopt" data-v="vision" aria-pressed="false">Vibram Vision</button><button type="button" class="fopt" data-v="frixion" aria-pressed="false">FriXion (LS)</button><button type="button" class="fopt" data-v="stealth" aria-pressed="false">Stealth (5.10)</button><button type="button" class="fopt" data-v="trax" aria-pressed="false">TRAX (evolv)</button><button type="button" class="fopt" data-v="sciencefriction" aria-pressed="false">Science Friction</button><button type="button" class="fopt" data-v="xtremefriction" aria-pressed="false">Xtreme Friction (Mad Rock)</button><button type="button" class="fopt" data-v="zenith" aria-pressed="false">Zenith (Boreal)</button><button type="button" class="fopt" data-v="cat" aria-pressed="false">Ocún CAT</button><button type="button" class="fopt" data-v="rx" aria-pressed="false">Red Chili RX</button><button type="button" class="fopt" data-v="uprh" aria-pressed="false">UnParallel RH/RA</button><button type="button" class="fopt" data-v="bd" aria-pressed="false">Black Diamond (Black Label)</button><button type="button" class="fopt" data-v="andere" aria-pressed="false">Sonstige / k. A.</button></div></div>
+    </div>
+    <div class="fsheet-foot"><button type="button" class="fsheet-go" id="f-go">Modelle anzeigen</button></div>
+  </div>
+</div>
+
 <div class="cmp-tray" id="cmp-tray">
   <div class="cmp-tray-inner">
     <span class="lbl">Vergleich</span>
@@ -891,53 +876,60 @@
   var count=document.getElementById('f-count');
   var empty=document.getElementById('fb-empty');
   var clearLink=document.getElementById('fb-clear');
+  var activeBox=document.getElementById('f-active');
+  var openBtn=document.getElementById('f-open'), openCount=document.getElementById('f-open-count');
+  var sheet=document.getElementById('f-sheet'), goBtnF=document.getElementById('f-go');
   var rows=Array.prototype.slice.call(document.querySelectorAll('tr[data-shoe]'));
   var sections=Array.prototype.slice.call(document.querySelectorAll('section[data-brandsec]'));
+  var TOTAL=rows.length;
+  function $$(sel,root){ return Array.prototype.slice.call((root||document).querySelectorAll(sel)); }
 
-  /* brand multi-select chips */
+  /* Marken-Chips: keine Auswahl = alle Marken */
   var activeBrands={};
   function brandCount(){ var n=0; for(var k in activeBrands){ if(activeBrands[k]) n++; } return n; }
-  var chips=Array.prototype.slice.call(document.querySelectorAll('.brandchips button'));
-  function syncChips(){
-    var any=brandCount()>0;
-    chips.forEach(function(c){
-      var b=c.getAttribute('data-b');
-      if(b==='all') c.classList.toggle('active', !any);
-      else c.classList.toggle('active', !!activeBrands[b]);
-    });
-  }
+  var chips=$$('#f-brand button');
+  function syncChips(){ chips.forEach(function(c){ c.setAttribute('aria-pressed', activeBrands[c.getAttribute('data-b')]?'true':'false'); }); }
   chips.forEach(function(c){
-    c.addEventListener('click',function(){
-      var b=c.getAttribute('data-b');
-      if(b==='all'){ activeBrands={}; } else { activeBrands[b]=!activeBrands[b]; }
-      syncChips(); apply();
-    });
+    c.addEventListener('click',function(){ var b=c.getAttribute('data-b'); activeBrands[b]=!activeBrands[b]; syncChips(); apply(); });
   });
 
-  /* custom multi-select dropdowns */
+  /* Filtergruppen im Sheet */
   var msState={};
-  var msList=Array.prototype.slice.call(document.querySelectorAll('.ms'));
-  function msLabel(ms){
-    var key=ms.getAttribute('data-key'), base=ms.getAttribute('data-label'), st=msState[key]||{};
-    var n=0; for(var k in st){ if(st[k]) n++; }
-    var btn=ms.querySelector('.ms-btn');
-    btn.textContent = n? base+' ('+n+')' : base;
-    btn.classList.toggle('has', n>0);
-  }
-  msList.forEach(function(ms){
-    var key=ms.getAttribute('data-key'); msState[key]={};
-    ms.querySelector('.ms-btn').addEventListener('click',function(e){
-      e.stopPropagation();
-      var wasOpen=ms.classList.contains('open');
-      msList.forEach(function(o){ o.classList.remove('open'); });
-      if(!wasOpen) ms.classList.add('open');
+  var groups=$$('.fgroup');
+  groups.forEach(function(g){
+    var key=g.getAttribute('data-key'); msState[key]={};
+    $$('button[data-v]',g).forEach(function(b){
+      b.addEventListener('click',function(){ var v=b.getAttribute('data-v'); msState[key][v]=!msState[key][v]; syncGroups(); apply(); });
     });
-    Array.prototype.slice.call(ms.querySelectorAll('input[type=checkbox]')).forEach(function(cb){
-      cb.addEventListener('change',function(){ msState[key][cb.value]=cb.checked; msLabel(ms); apply(); });
-    });
-    ms.querySelector('.ms-panel').addEventListener('click',function(e){ e.stopPropagation(); });
   });
-  document.addEventListener('click',function(){ msList.forEach(function(o){ o.classList.remove('open'); }); });
+  function syncGroups(){
+    groups.forEach(function(g){ var st=msState[g.getAttribute('data-key')];
+      $$('button[data-v]',g).forEach(function(b){ b.setAttribute('aria-pressed', st[b.getAttribute('data-v')]?'true':'false'); }); });
+  }
+  function setKeys(o){ var a=[]; for(var k in o){ if(o[k]) a.push(k); } return a; }
+  function groupSummary(g){
+    var key=g.getAttribute('data-key'), vals=setKeys(msState[key]); if(!vals.length) return '';
+    if(g.hasAttribute('data-scale')){
+      vals=vals.map(Number).sort(); var contiguous=vals[vals.length-1]-vals[0]===vals.length-1;
+      return (contiguous&&vals.length>1)? vals[0]+'–'+vals[vals.length-1] : vals.join(', ');
+    }
+    var labels=$$('button[data-v]',g).filter(function(b){ return msState[key][b.getAttribute('data-v')]; }).map(function(b){ return b.textContent; });
+    return labels.length>2 ? labels.slice(0,2).join(', ')+' +'+(labels.length-2) : labels.join(', ');
+  }
+  function renderActive(){
+    activeBox.innerHTML=''; var n=0;
+    groups.forEach(function(g){
+      var sum=groupSummary(g); if(!sum) return; n++;
+      var p=document.createElement('button'); p.type='button'; p.className='pill';
+      p.setAttribute('aria-label',g.getAttribute('data-label')+' '+sum+' entfernen');
+      p.appendChild(document.createTextNode(g.getAttribute('data-label')+': '+sum));
+      var x=document.createElement('span'); x.setAttribute('aria-hidden','true'); x.textContent='×'; p.appendChild(x);
+      p.addEventListener('click',function(){ msState[g.getAttribute('data-key')]={}; syncGroups(); apply(); });
+      activeBox.appendChild(p);
+    });
+    openCount.hidden=n===0; openCount.textContent=n;
+    return n;
+  }
 
   function passSet(key,val){
     var st=msState[key]; if(!st) return true;
@@ -964,37 +956,65 @@
       if(ok) visible++;
     });
     sections.forEach(function(sec){
-      var vis=Array.prototype.slice.call(sec.querySelectorAll('tr[data-shoe]')).some(function(r){return r.style.display!=='none';});
+      var vis=$$('tr[data-shoe]',sec).some(function(r){return r.style.display!=='none';});
       sec.style.display = vis?'':'none';
     });
     empty.style.display = visible===0?'block':'none';
-    count.textContent = visible+(visible===1?' Modell':' Modelle');
+    var nGroups=renderActive();
+    var anyFilter = nGroups>0 || anyB || newOnly || !!term;
+    count.innerHTML = '<b>'+visible+(visible===1?' Modell':' Modelle')+'</b>'+(anyFilter?' von '+TOTAL:'');
+    reset.hidden = !anyFilter;
+    goBtnF.textContent = visible===0 ? 'Keine Treffer – Filter lockern' : visible+(visible===1?' Modell':' Modelle')+' anzeigen';
     writeHash();
   }
   q.addEventListener('input',apply);
 
-  /* "Nur Neuheiten"-Toggle */
+  /* "Nur Neuheiten"-Schalter */
   var newOnly=false;
   var newBtn=document.getElementById('f-new');
-  function syncNew(){ newBtn.setAttribute('aria-pressed', newOnly?'true':'false'); }
+  function syncNew(){ newBtn.setAttribute('aria-checked', newOnly?'true':'false'); }
   newBtn.addEventListener('click',function(){ newOnly=!newOnly; syncNew(); apply(); });
 
   function doReset(e){ if(e) e.preventDefault();
     q.value=''; activeBrands={}; newOnly=false; syncNew();
     for(var key in msState){ msState[key]={}; }
-    msList.forEach(function(ms){
-      Array.prototype.slice.call(ms.querySelectorAll('input[type=checkbox]')).forEach(function(cb){ cb.checked=false; });
-      msLabel(ms);
-    });
-    syncChips(); apply();
+    syncGroups(); syncChips(); apply();
   }
   reset.addEventListener('click',doReset);
   clearLink.addEventListener('click',doReset);
+  document.getElementById('f-sheet-reset').addEventListener('click',function(e){ e.preventDefault();
+    for(var key in msState){ msState[key]={}; } syncGroups(); apply(); });
+
+  /* Sheet öffnen/schließen */
+  /* Hintergrund sperren, solange das Sheet offen ist (inert + Tab-Falle als Fallback) */
+  function setBackgroundInert(on){
+    Array.prototype.forEach.call(document.body.children,function(el){
+      if(el===sheet || el.tagName==='SCRIPT') return;
+      if(on){ el.setAttribute('inert',''); el.setAttribute('aria-hidden','true'); }
+      else { el.removeAttribute('inert'); el.removeAttribute('aria-hidden'); }
+    });
+  }
+  function sheetFocusables(){
+    return $$('button,a[href],input,[tabindex]:not([tabindex="-1"])',sheet).filter(function(el){ return !el.disabled && el.offsetParent!==null; });
+  }
+  sheet.addEventListener('keydown',function(e){
+    if(e.key!=='Tab') return;
+    var f=sheetFocusables(); if(!f.length) return;
+    var first=f[0], last=f[f.length-1];
+    if(e.shiftKey && (document.activeElement===first || !sheet.contains(document.activeElement))){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && (document.activeElement===last || !sheet.contains(document.activeElement))){ e.preventDefault(); first.focus(); }
+  });
+  function openSheet(){ sheet.hidden=false; document.body.classList.add('sheet-on'); setBackgroundInert(true); var f=sheet.querySelector('button[data-v]'); if(f) f.focus(); }
+  function closeSheet(){ if(sheet.hidden) return; sheet.hidden=true; document.body.classList.remove('sheet-on'); setBackgroundInert(false); openBtn.focus(); }
+  openBtn.addEventListener('click',openSheet);
+  goBtnF.addEventListener('click',closeSheet);
+  document.getElementById('f-sheet-close').addEventListener('click',closeSheet);
+  sheet.addEventListener('click',function(e){ if(e.target===sheet) closeSheet(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeSheet(); });
 
   /* ---------- FILTERSTATUS IN DER URL (#q=…&b=…&h=3,4&new=1&sort=…) ---------- */
   var sortState={}; /* sectionId -> 'key.dir' */
   var hashReady=false;
-  function setKeys(o){ var a=[]; for(var k in o){ if(o[k]) a.push(k); } return a; }
   function writeHash(){
     if(!hashReady) return;
     var p=[];
@@ -1017,17 +1037,14 @@
   if(initial){
     if(initial.q) q.value=initial.q;
     if(initial.b) initial.b.split(',').forEach(function(x){ if(BRANDS[x]) activeBrands[x]=true; });
-    msList.forEach(function(ms){
-      var key=ms.getAttribute('data-key'); if(!initial[key]) return;
-      var vals=initial[key].split(',');
-      Array.prototype.slice.call(ms.querySelectorAll('input[type=checkbox]')).forEach(function(cb){
-        if(vals.indexOf(cb.value)>-1){ cb.checked=true; msState[key][cb.value]=true; }
-      });
-      msLabel(ms);
+    groups.forEach(function(g){
+      var key=g.getAttribute('data-key'); if(!initial[key]) return;
+      var valid=$$('button[data-v]',g).map(function(b){ return b.getAttribute('data-v'); });
+      initial[key].split(',').forEach(function(v){ if(valid.indexOf(v)>-1) msState[key][v]=true; });
     });
     if(initial['new']==='1'){ newOnly=true; syncNew(); }
   }
-  syncChips(); hashReady=true; apply();
+  syncChips(); syncGroups(); hashReady=true; apply();
 
   /* ---------- SORT (per table) ---------- */
   var nivRank={ein:1,int:2,fort:3,pro:4};
