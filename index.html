@@ -185,6 +185,15 @@
   .ms-panel .num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;font-weight:700;font-size:.78rem;margin-right:2px}
   td.rubber{font-size:.78rem}
   .rub{display:inline-block;font-size:.72rem;font-weight:600;color:var(--ink);background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:3px 8px;white-space:nowrap}
+  /* ---- Neuheiten-Badge + Toggle ---- */
+  .newbadge{display:inline-block;margin-left:7px;vertical-align:2px;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:#1a1208;background:var(--accent-2);border-radius:5px;padding:2px 6px}
+  .newbadge.ann{background:transparent;color:var(--accent-2);box-shadow:inset 0 0 0 1px var(--accent-2)}
+  #f-new{font-family:'Archivo',sans-serif;font-size:.84rem;font-weight:600;color:var(--ink-dim);cursor:pointer;
+    background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:9px 12px;transition:.15s}
+  #f-new:hover{border-color:var(--accent);color:var(--ink)}
+  #f-new[aria-pressed="true"]{background:var(--accent-2);color:#1a1208;border-color:var(--accent-2)}
+  .cmp-table a.src{color:var(--accent);font-size:.78rem;word-break:break-all}
 </style>
 </head>
 <body>
@@ -334,6 +343,7 @@
         <label><input type="checkbox" value="uprh">UP RH</label>
       </div>
     </div>
+    <button id="f-new" type="button" aria-pressed="false" title="Nur Modelle zeigen, die seit Mitte 2026 neu oder angekündigt sind">Nur Neuheiten</button>
     <button id="f-reset" type="button">Zurücksetzen</button>
     <span id="f-count"></span>
   </div>
@@ -728,6 +738,19 @@
 
   function shoeName(r){ var m=r.querySelector('.model'); return (m&&m.childNodes[0])?m.childNodes[0].textContent.trim():''; }
   function chip(v){ return '<span class="chip v'+v+'">'+v+'</span>'; }
+  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function safeUrl(u){ return (u && /^https?:\/\//i.test(u)) ? esc(u) : ''; }
+
+  /* ---------- NEUHEITEN-BADGES (data-new="neu" | "angekuendigt") ---------- */
+  document.querySelectorAll('tr[data-shoe][data-new]').forEach(function(r){
+    var m=r.querySelector('.model'); if(!m) return;
+    var ann=r.getAttribute('data-new')==='angekuendigt';
+    var b=document.createElement('span'); b.className='newbadge'+(ann?' ann':'');
+    b.textContent=ann?'angekündigt':'neu';
+    b.title=ann?'Angekündigt, noch nicht (überall) erhältlich':'Neu seit Mitte 2026';
+    var small=m.querySelector('small');
+    if(small) m.insertBefore(b,small); else m.appendChild(b);
+  });
 
   function onToggle(r,cb){
     if(cb.checked){
@@ -772,6 +795,10 @@
       ['Sohle / Gummi', function(r){ var e=r.querySelector('.rubber'); return e?e.innerHTML:''; }],
       ['Niveau', function(r){ var n=NIV[r.getAttribute('data-niv')]; return n?'<span class="niv '+n[1]+'">'+n[0]+'</span>':''; }]
     ];
+    if(selected.some(function(r){ return safeUrl(r.getAttribute('data-src')); })){
+      attrs.push(['Quelle', function(r){ var u=safeUrl(r.getAttribute('data-src'));
+        return u?'<a class="src" href="'+u+'" target="_blank" rel="noopener">'+esc(u.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,''))+'</a>':'–'; }]);
+    }
     var html='<table class="cmp-table"><thead><tr><th></th>';
     selected.forEach(function(r){ html+='<th><span class="brandtag">'+(BRANDS[r.getAttribute('data-brand')]||'')+'</span>'+shoeName(r)+'</th>'; });
     html+='</tr></thead><tbody>';
@@ -865,6 +892,7 @@
       if(ok && !passSet('a', r.getAttribute('data-a'))) ok=false;
       if(ok && !passSet('width', r.getAttribute('data-width'))) ok=false;
       if(ok && !passSet('rubber', r.getAttribute('data-rubbercat'))) ok=false;
+      if(ok && newOnly && !r.hasAttribute('data-new')) ok=false;
       if(ok && term && r.textContent.toLowerCase().indexOf(term)===-1) ok=false;
       r.style.display = ok?'':'none';
       if(ok) visible++;
@@ -875,10 +903,18 @@
     });
     empty.style.display = visible===0?'block':'none';
     count.textContent = visible+(visible===1?' Modell':' Modelle');
+    writeHash();
   }
   q.addEventListener('input',apply);
+
+  /* "Nur Neuheiten"-Toggle */
+  var newOnly=false;
+  var newBtn=document.getElementById('f-new');
+  function syncNew(){ newBtn.setAttribute('aria-pressed', newOnly?'true':'false'); }
+  newBtn.addEventListener('click',function(){ newOnly=!newOnly; syncNew(); apply(); });
+
   function doReset(e){ if(e) e.preventDefault();
-    q.value=''; activeBrands={};
+    q.value=''; activeBrands={}; newOnly=false; syncNew();
     for(var key in msState){ msState[key]={}; }
     msList.forEach(function(ms){
       Array.prototype.slice.call(ms.querySelectorAll('input[type=checkbox]')).forEach(function(cb){ cb.checked=false; });
@@ -888,32 +924,79 @@
   }
   reset.addEventListener('click',doReset);
   clearLink.addEventListener('click',doReset);
-  syncChips(); apply();
+
+  /* ---------- FILTERSTATUS IN DER URL (#q=…&b=…&h=3,4&new=1&sort=…) ---------- */
+  var sortState={}; /* sectionId -> 'key.dir' */
+  var hashReady=false;
+  function setKeys(o){ var a=[]; for(var k in o){ if(o[k]) a.push(k); } return a; }
+  function writeHash(){
+    if(!hashReady) return;
+    var p=[];
+    var term=q.value.trim(); if(term) p.push('q='+encodeURIComponent(term));
+    var b=setKeys(activeBrands); if(b.length) p.push('b='+b.join(','));
+    for(var key in msState){ var v=setKeys(msState[key]); if(v.length) p.push(key+'='+v.join(',')); }
+    if(newOnly) p.push('new=1');
+    var s=[]; for(var sec in sortState){ s.push(sec+'.'+sortState[sec]); } if(s.length) p.push('sort='+s.join(','));
+    var h=p.length?'#'+p.join('&'):'';
+    var cur=location.hash, curIsState=cur.indexOf('=')>-1;
+    if(!h && !curIsState) return; /* Sprunganker wie #ocun nicht anfassen */
+    if(h!==cur) history.replaceState(null,'',h||(location.pathname+location.search));
+  }
+  function readHash(){
+    var h=location.hash.replace(/^#/,''); if(!h || h.indexOf('=')===-1) return null;
+    var o={}; h.split('&').forEach(function(kv){ var i=kv.indexOf('='); if(i>0){ try{ o[kv.slice(0,i)]=decodeURIComponent(kv.slice(i+1)); }catch(e){} } });
+    return o;
+  }
+  var initial=readHash();
+  if(initial){
+    if(initial.q) q.value=initial.q;
+    if(initial.b) initial.b.split(',').forEach(function(x){ if(BRANDS[x]) activeBrands[x]=true; });
+    msList.forEach(function(ms){
+      var key=ms.getAttribute('data-key'); if(!initial[key]) return;
+      var vals=initial[key].split(',');
+      Array.prototype.slice.call(ms.querySelectorAll('input[type=checkbox]')).forEach(function(cb){
+        if(vals.indexOf(cb.value)>-1){ cb.checked=true; msState[key][cb.value]=true; }
+      });
+      msLabel(ms);
+    });
+    if(initial['new']==='1'){ newOnly=true; syncNew(); }
+  }
+  syncChips(); hashReady=true; apply();
 
   /* ---------- SORT (per table) ---------- */
   var nivRank={ein:1,int:2,fort:3,pro:4};
+  var sorters={}; /* sectionId -> function(key,dir) */
   shoeTables.forEach(function(table){
     var tbody=table.querySelector('tbody');
     var ths=Array.prototype.slice.call(table.querySelectorAll('thead th'));
+    var sec=table.closest('section[data-brandsec]'); var secId=sec?sec.id:'';
+    function sortBy(th,idx,dir){
+      var type=th.getAttribute('data-sort')||'text';
+      ths.forEach(function(o){ o.removeAttribute('data-dir'); o.classList.remove('sorted-asc','sorted-desc'); });
+      th.setAttribute('data-dir',dir);
+      th.classList.add(dir==='asc'?'sorted-asc':'sorted-desc');
+      var trs=Array.prototype.slice.call(tbody.querySelectorAll('tr[data-shoe]'));
+      trs.sort(function(a,b){
+        var av,bv;
+        if(type==='h'||type==='d'||type==='a'){ av=parseInt(a.getAttribute('data-'+type),10); bv=parseInt(b.getAttribute('data-'+type),10); }
+        else if(type==='niv'){ av=nivRank[a.getAttribute('data-niv')]||0; bv=nivRank[b.getAttribute('data-niv')]||0; }
+        else { av=(a.children[idx]?a.children[idx].textContent:'').trim().toLowerCase(); bv=(b.children[idx]?b.children[idx].textContent:'').trim().toLowerCase(); }
+        if(av<bv) return dir==='asc'?-1:1; if(av>bv) return dir==='asc'?1:-1; return 0;
+      });
+      trs.forEach(function(r){ tbody.appendChild(r); });
+      if(secId){ sortState[secId]=th.getAttribute('data-sort')+'.'+dir; writeHash(); }
+    }
     ths.forEach(function(th,idx){
       if(!th.classList.contains('sortable')) return;
-      th.addEventListener('click',function(){
-        var type=th.getAttribute('data-sort')||'text';
-        var dir=th.getAttribute('data-dir')==='asc'?'desc':'asc';
-        ths.forEach(function(o){ o.removeAttribute('data-dir'); o.classList.remove('sorted-asc','sorted-desc'); });
-        th.setAttribute('data-dir',dir);
-        th.classList.add(dir==='asc'?'sorted-asc':'sorted-desc');
-        var trs=Array.prototype.slice.call(tbody.querySelectorAll('tr[data-shoe]'));
-        trs.sort(function(a,b){
-          var av,bv;
-          if(type==='h'||type==='d'||type==='a'){ av=parseInt(a.getAttribute('data-'+type),10); bv=parseInt(b.getAttribute('data-'+type),10); }
-          else if(type==='niv'){ av=nivRank[a.getAttribute('data-niv')]||0; bv=nivRank[b.getAttribute('data-niv')]||0; }
-          else { av=(a.children[idx]?a.children[idx].textContent:'').trim().toLowerCase(); bv=(b.children[idx]?b.children[idx].textContent:'').trim().toLowerCase(); }
-          if(av<bv) return dir==='asc'?-1:1; if(av>bv) return dir==='asc'?1:-1; return 0;
-        });
-        trs.forEach(function(r){ tbody.appendChild(r); });
-      });
+      th.addEventListener('click',function(){ sortBy(th,idx, th.getAttribute('data-dir')==='asc'?'desc':'asc'); });
     });
+    if(secId) sorters[secId]=function(key,dir){
+      for(var i=0;i<ths.length;i++){ if(ths[i].getAttribute('data-sort')===key){ sortBy(ths[i],i,dir==='desc'?'desc':'asc'); return; } }
+    };
+  });
+  /* Sortierung aus der URL wiederherstellen (sort=lasportiva.h.desc,scarpa.model.asc) */
+  if(initial && initial.sort) initial.sort.split(',').forEach(function(s){
+    var p=s.split('.'); if(p.length===3 && sorters[p[0]]) sorters[p[0]](p[1],p[2]);
   });
 })();
 </script>
