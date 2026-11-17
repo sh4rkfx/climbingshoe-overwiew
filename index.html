@@ -986,8 +986,26 @@
     for(var key in msState){ msState[key]={}; } syncGroups(); apply(); });
 
   /* Sheet öffnen/schließen */
-  function openSheet(){ sheet.hidden=false; document.body.classList.add('sheet-on'); var f=sheet.querySelector('button[data-v]'); if(f) f.focus(); }
-  function closeSheet(){ if(sheet.hidden) return; sheet.hidden=true; document.body.classList.remove('sheet-on'); openBtn.focus(); }
+  /* Hintergrund sperren, solange das Sheet offen ist (inert + Tab-Falle als Fallback) */
+  function setBackgroundInert(on){
+    Array.prototype.forEach.call(document.body.children,function(el){
+      if(el===sheet || el.tagName==='SCRIPT') return;
+      if(on){ el.setAttribute('inert',''); el.setAttribute('aria-hidden','true'); }
+      else { el.removeAttribute('inert'); el.removeAttribute('aria-hidden'); }
+    });
+  }
+  function sheetFocusables(){
+    return $$('button,a[href],input,[tabindex]:not([tabindex="-1"])',sheet).filter(function(el){ return !el.disabled && el.offsetParent!==null; });
+  }
+  sheet.addEventListener('keydown',function(e){
+    if(e.key!=='Tab') return;
+    var f=sheetFocusables(); if(!f.length) return;
+    var first=f[0], last=f[f.length-1];
+    if(e.shiftKey && (document.activeElement===first || !sheet.contains(document.activeElement))){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && (document.activeElement===last || !sheet.contains(document.activeElement))){ e.preventDefault(); first.focus(); }
+  });
+  function openSheet(){ sheet.hidden=false; document.body.classList.add('sheet-on'); setBackgroundInert(true); var f=sheet.querySelector('button[data-v]'); if(f) f.focus(); }
+  function closeSheet(){ if(sheet.hidden) return; sheet.hidden=true; document.body.classList.remove('sheet-on'); setBackgroundInert(false); openBtn.focus(); }
   openBtn.addEventListener('click',openSheet);
   goBtnF.addEventListener('click',closeSheet);
   document.getElementById('f-sheet-close').addEventListener('click',closeSheet);
