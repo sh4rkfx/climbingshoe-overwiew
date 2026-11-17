@@ -16,7 +16,7 @@ Einfach `index.html` im Browser öffnen – keine Installation nötig. Mit GitHu
 | **7 Vergleichsdimensionen** | Performance/Einsatz, Härte (1–5), Downturn (1–5), Asymmetrie (1–5), Leisten/Fit, Verschluss, Sohlengummi, Niveau |
 | **Kalibrierte Skalen** | Werte sind *herstellerübergreifend* vergleichbar – ein „Downturn 4" bedeutet bei jeder Marke dasselbe |
 | **Farbcodierung** | Grün (weich/flach/symmetrisch) → Rot (steif/aggressiv/spitz) für Erfassung auf einen Blick |
-| **Multi-Select-Filter** | Marke (Chips), Niveau, Härte, Downturn, Asymmetrie, Leisten-Breite, Gummi-Familie – innerhalb einer Gruppe ODER-verknüpft, gruppenübergreifend UND (z. B. „Härte 3+4, Leisten breit, XS Edge") |
+| **Filter** | Kompakte Leiste mit Suche, Marken-Chips (wischbar auf dem Handy) und Neuheiten-Schalter; weitere Filter (Niveau, Härte/Downturn/Asymmetrie als 1–5-Leiste, Leisten, Gummi) in einem Filter-Fenster (mobil von unten). Innerhalb einer Gruppe ODER, gruppenübergreifend UND. Aktive Filter erscheinen als entfernbare Kärtchen, dazu Trefferzahl „x von 133“ und „Alle Filter löschen“ |
 | **Freitextsuche** | Über Modellname, Einsatzbeschreibung, Verschluss, Fit |
 | **Sortierung** | Klick auf Spaltenkopf, numerisch/alphabetisch/nach Niveau-Rang, Richtung umschaltbar |
 | **Direktvergleich** | Bis zu 5 Schuhe (markenübergreifend) per Checkbox markieren → Gegenüberstellung im Modal, Attribute als Zeilen, inkl. Link zur Herstellerquelle |
@@ -29,7 +29,8 @@ Einfach `index.html` im Browser öffnen – keine Installation nötig. Mit GitHu
 
 - **Eine einzige HTML-Datei** (~145 KB): HTML + CSS + Vanilla JS, keine Frameworks, keine Build-Tools
 - Daten als `data-*`-Attribute direkt an den Tabellenzeilen → Filter/Sortierung/Vergleich arbeiten auf dem DOM, keine separate Datenhaltung
-- Custom Multi-Select-Dropdowns, Sticky-Filterleiste, Vergleichs-Tray + Modal ohne Libraries
+- Sticky-Filterleiste, Filter-Sheet (Dialog mit Esc/Hintergrund-Klick), Vergleichs-Tray + Modal ohne Libraries
+- Farblogik: ausgewählt = helles Creme, Orange nur für die Hauptaktion und Links, Gold für Neuheiten, Grün→Rot ausschließlich für die 1–5-Skalen
 - Fonts: Fraunces + Archivo (Google Fonts, einziger externer Request)
 - Responsive (horizontales Scrollen der Tabellen auf Mobile)
 
